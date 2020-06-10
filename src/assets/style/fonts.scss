@@ -27,3 +27,13 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Intro';
+  src:
+    url('../fonts/intro-400-normal.woff2') format('woff2'),
+    url('../fonts/intro-400-normal.woff') format('woff'),
+    url('../fonts/intro-400-normal.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
