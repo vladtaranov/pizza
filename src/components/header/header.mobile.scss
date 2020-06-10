@@ -1,0 +1,108 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .header {
+    height: 3em;
+    font-size: .85rem;
+
+    &__menu-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3em;
+      height: 3em;
+      margin: 0 .4em 0 -.75em;
+      padding-top: .1em;
+      @include clickable;
+
+      &::before {
+        content: 'menu';
+        @include materialIcon(2em);
+      }
+
+      &.is-open::before {
+        content: 'close';
+      }
+    }
+
+    &__logo {
+      margin-right: auto;
+      font-size: 1.3em;
+    }
+
+    &__cart {
+      height: 2em;
+
+      @media screen and (max-width: 400px) {
+        &-title {
+          display: none;
+        }
+
+        &-count {
+          border: none;
+          padding: 0;
+        }
+      }
+    }
+
+    &__mobile-menu {
+      position: fixed;
+      z-index: -1;
+      top: 100vh;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: 100%;
+      padding: 0 1rem;
+      background: white;
+      visibility: hidden;
+      opacity: 0;
+      transition: all $transitionStandard;
+
+      &.is-open {
+        display: flex;
+        z-index: 900;
+        top: 3em;
+        visibility: visible;
+        opacity: 1;
+        transition: all $transitionStandard;
+      }
+    }
+
+    &__account {
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      width: 100%;
+      max-width: 400px;
+      margin: 2em auto 0 auto;
+    }
+
+    &__login,
+    &__register {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 3em;
+      margin: 0;
+      border-bottom: 1px solid #ddd;
+
+      &:first-child {
+        border-top: 1px solid #ddd;
+      }
+    }
+
+    &__currency {
+      margin: 2em 0 0 0;
+
+      &-item {
+        margin: 0 .5em;
+      }
+    }
+  }
+}

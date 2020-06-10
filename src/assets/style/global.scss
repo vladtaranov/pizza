@@ -1,0 +1,23 @@
+@import './constants';
+@import './mixins';
+
+body {
+  background: white;
+  font-size: 1rem;
+  color: $colorBlack;
+  @include font('Montserrat');
+}
+
+.wrapper {
+  width: 100%;
+  min-width: 320px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .wrapper {
+    padding: 0 1rem;
+  }
+}

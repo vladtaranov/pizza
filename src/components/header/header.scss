@@ -1,0 +1,139 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.header {
+  width: 100%;
+  height: 4em;
+  border-bottom: 1px solid #ddd;
+  font-size: .9rem;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__menu-icon {
+    display: none;
+  }
+
+  &__mobile-menu {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__account {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__login,
+  &__register {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-right: 2em;
+    cursor: pointer;
+    @include clickable;
+
+    &:hover {
+      color: $colorPrimary;
+      transition: all $transitionStandard;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-right: 1.5em;
+    padding: .1em 0 0 0;
+    font-size: 1.75em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    @include font('Intro');
+    @include clickable;
+
+    & span {
+      border-bottom: .2em solid $colorBlack;
+    }
+
+    &:hover span {
+      border-color: $colorPrimary;
+      color: $colorPrimary;
+      transition: all $transitionStandard;
+    }
+  }
+
+  &__currency-and-cart {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__currency {
+    display: flex;
+    margin-left: auto;
+    font-size: .9em;
+
+    &-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2.5em;
+      height: 2.5em;
+      margin-left: .25em;
+      border-radius: .5em;
+      cursor: pointer;
+      @include clickable;
+
+      &.is-active {
+        cursor: default;
+        background: $gradientGray;
+      }
+
+      &:hover {
+        background: $gradientGray;
+        transition: all $transitionStandard;
+      }
+    }
+  }
+
+  &__cart {
+    display: flex;
+    align-items: center;
+    height: 2.5em;
+    background: $gradientPrimary;
+    margin-left: 1.5em;
+    border-radius: .5em;
+    padding: 0 1em;
+    color: white;
+    cursor: pointer;
+    @include clickable;
+
+    &-title,
+    &-count {
+      display: flex;
+      align-items: center;
+      height: 1.25em;
+    }
+
+    &-title {
+      padding-right: .5em;
+    }
+
+    &-count {
+      border-left: 1px solid rgba(white, .75);
+      padding-left: .5em;
+    }
+
+    &:hover {
+      opacity: .75;
+      transition: all $transitionStandard;
+    }
+  }
+}
