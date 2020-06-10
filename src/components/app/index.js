@@ -4,6 +4,7 @@ const App = () => {
   return (
     <Fragment>
       <h1>hallo</h1>
+      <h2>auf wiedersehen</h2>
     </Fragment>
   );
 };
