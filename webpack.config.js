@@ -91,6 +91,9 @@ module.exports = (env = {}) => {
           loader: 'file-loader',
           options: {
             outputPath: `./${paths.ASSETS}/fonts`,
+            publicPath: isProduction
+              ? '../fonts'
+              : `./${paths.ASSETS}/fonts`,
             name: '[name]-[hash:5].[ext]'
           }
         }
