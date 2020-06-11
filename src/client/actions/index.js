@@ -7,6 +7,14 @@ const saveProducts = (products) => {
   }
 };
 
+const setCurrency = (currency) => {
+  return {
+    type: actionTypes.SET_CURRENCY,
+    payload: currency
+  }
+};
+
 export default {
-  saveProducts
+  saveProducts,
+  setCurrency
 }

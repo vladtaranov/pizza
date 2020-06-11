@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { boundMethod } from 'autobind-decorator';
+
+import currencies from '../../constants/currencies';
 import cn from 'classnames';
 import './header.scss';
 import './header.mobile.scss';
@@ -10,11 +13,6 @@ class Header extends React.Component {
     this.state = {
       isMobileMenuOpen: false
     };
-
-    this.currencies = [
-      { value: 'EUR', title: '€', isActive: true },
-      { value: 'USD', title: '$' }
-    ];
   }
 
   @boundMethod
@@ -25,6 +23,8 @@ class Header extends React.Component {
   }
 
   render () {
+    const { currency: currentCurrency, setCurrency } = this.props;
+
     const menuIconStyle = cn(
       'header__menu-icon',
       { 'is-open': this.state.isMobileMenuOpen }
@@ -58,17 +58,24 @@ class Header extends React.Component {
                 Registrieren
               </div>
             </div>
-
             <ul className="header__currency">
               {
-                this.currencies.map((currency) => {
+                Object.values(currencies).map((currency) => {
                   const style = cn(
                     'header__currency-item',
-                    { 'is-active': currency.isActive }
+                    { 'is-active': currency.value === currentCurrency }
                   );
+                  const onClick = () => {
+                    if (currency.value !== currentCurrency) {
+                      setCurrency(currency.value);
+                    }
+                  };
 
                   return (
-                    <li key={currency.value} className={style}>
+                    <li
+                      key={currency.value}
+                      className={style}
+                      onClick={onClick}>
                       {currency.title}
                     </li>
                   );
@@ -91,5 +98,10 @@ class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  currency: PropTypes.string.isRequired,
+  setCurrency: PropTypes.func.isRequired
+};
 
 export default Header;

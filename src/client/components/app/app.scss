@@ -2,5 +2,10 @@
 @import '../../assets/style/mixins';
 
 .app {
-
+  &__title {
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: bold;
+    text-align: center;
+  }
 }

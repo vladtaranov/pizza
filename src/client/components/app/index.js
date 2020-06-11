@@ -8,6 +8,8 @@ import Server from '../../services/server';
 import ErrorMessage from '../error-boundary';
 import Spinner from '../spinner';
 import Header from '../header';
+import Product from '../product';
+import './app.scss';
 
 class App extends React.Component {
   constructor (props) {
@@ -39,6 +41,7 @@ class App extends React.Component {
 
   render () {
     const { isFetching, hasFetchingError } = this.state;
+    const { products, currency, setCurrency } = this.props;
 
     if (isFetching) return <Spinner />;
 
@@ -46,26 +49,47 @@ class App extends React.Component {
 
     return (
       <Fragment>
-        <Header />
-        <h1>hallo2l</h1>
-        <h2>auf wiedersehen</h2>
+        <Header
+          currency={currency}
+          setCurrency={setCurrency} />
+
+        <div className="wrapper">
+          <h2 className="app__title">Pizza, die Sie lieben werden!</h2>
+          <div className="app__catalog">
+            {
+              products.map((product) => {
+                return <Product
+                  key={product.id}
+                  product={product}
+                  currency={currency} />
+              })
+            }
+          </div>
+        </div>
       </Fragment>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    products: state.products,
+    currency: state.currency
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveProducts: bindActionCreators(actions.saveProducts, dispatch)
+    saveProducts: bindActionCreators(actions.saveProducts, dispatch),
+    setCurrency: bindActionCreators(actions.setCurrency, dispatch)
   };
 };
 
 App.propTypes = {
-  saveProducts: PropTypes.func.isRequired
+  products: PropTypes.array.isRequired,
+  currency: PropTypes.string.isRequired,
+  saveProducts: PropTypes.func.isRequired,
+  setCurrency: PropTypes.func.isRequired
 };
 
 export default connect(
