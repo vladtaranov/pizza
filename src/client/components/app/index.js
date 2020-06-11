@@ -1,5 +1,9 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import actions from '../../actions';
 import Server from '../../services/server';
 import Header from '../header';
 
@@ -9,17 +13,25 @@ class App extends React.Component {
     this.server = new Server();
 
     this.state = {
-      products: []
+      isFetching: true,
+      hasFetchingError: false
     };
   }
 
   async componentDidMount () {
+    const { saveProducts } = this.props;
     try {
       const products = await this.server.getAllProducts();
-      console.log(products);
-      this.setState({ products });
+      saveProducts(products);
+      this.setState({
+        isFetching: false
+      });
     } catch (error) {
       console.log(error);
+      this.setState({
+        isFetching: false,
+        hasFetchingError: true
+      });
     }
   }
 
@@ -34,4 +46,21 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveProducts: bindActionCreators(actions.saveProducts, dispatch)
+  };
+};
+
+App.propTypes = {
+  saveProducts: PropTypes.func.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
