@@ -110,6 +110,16 @@ module.exports = (env = {}) => {
               : `./${paths.ASSETS}/fonts`,
             name: '[name]-[hash:5].[ext]'
           }
+        },
+
+        // Loading images
+        {
+          test: /\.(jpg|png|svg)$/,
+          loader: 'file-loader',
+          options: {
+            outputPath: `./${paths.assets}/images`,
+            name: '[name]-[hash:5].[ext]'
+          }
         }
       ]
     }
