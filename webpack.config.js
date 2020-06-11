@@ -117,8 +117,9 @@ module.exports = (env = {}) => {
           test: /\.(jpg|png|svg)$/,
           loader: 'file-loader',
           options: {
-            outputPath: `./${paths.assets}/images`,
-            name: '[name]-[hash:5].[ext]'
+            outputPath: `./${paths.ASSETS}/images`,
+            name: '[name]-[hash:5].[ext]',
+            esModule: false
           }
         }
       ]
