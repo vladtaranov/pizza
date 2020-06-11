@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon src/server/index.js",
     "client": "webpack-dev-server --env.mode=development",
-    "build": "webpack --env.mode=production"
+    "build": "webpack --env.mode=production",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "autobind-decorator": "^2.4.0",
