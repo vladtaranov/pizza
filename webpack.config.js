@@ -2,7 +2,7 @@ const Path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const modes = {
   DEV: 'development',
   PROD: 'production'
@@ -11,6 +11,8 @@ const modes = {
 const paths = {
   DEV: 'src',
   PROD: 'dist',
+  SERVER: 'server',
+  CLIENT: 'client',
   ASSETS: 'assets'
 };
 
@@ -23,7 +25,7 @@ module.exports = (env = {}) => {
     const plugins = [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: Path.join(paths.DEV, 'index.html')
+        template: Path.join(paths.DEV, paths.CLIENT, 'index.html')
       })
     ];
 
@@ -31,6 +33,14 @@ module.exports = (env = {}) => {
       plugins.push(
         new MiniCssExtractPlugin({
           filename: Path.join(paths.ASSETS, 'css', 'style-[hash:5].css')
+        }),
+        new CopyWebpackPlugin({
+          patterns: [
+            {
+              from: `./${paths.DEV}/${paths.SERVER}`,
+              to: Path.join(process.cwd(), paths.PROD)
+            }
+          ]
         })
       );
     }
@@ -51,17 +61,21 @@ module.exports = (env = {}) => {
   return {
     mode: isDevelopment ? modes.DEV : modes.PROD,
     devtool: isDevelopment ? 'inline-source-map' : 'source-map',
-    entry: Path.join(__dirname, paths.DEV, 'index.js'),
+    entry: Path.join(process.cwd(), paths.DEV, paths.CLIENT, 'index.js'),
     output: {
-      path: Path.join(__dirname, paths.PROD),
+      path: Path.join(process.cwd(), paths.PROD, paths.CLIENT),
       filename: Path.join(paths.ASSETS, 'js', 'script-[hash:5].js')
     },
 
     devServer: {
-      contentBase: Path.join(__dirname, paths.PROD),
+      contentBase: Path.join(__dirname, paths.PROD, paths.CLIENT),
       port: 9000,
       open: true,
-      compress: true
+      compress: true,
+      historyApiFallback: true,
+      proxy: {
+        '/api': 'http://localhost:8080'
+      }
     },
 
     plugins: getPlugins(),
