@@ -53,19 +53,22 @@ class App extends React.Component {
           currency={currency}
           setCurrency={setCurrency} />
 
-        <div className="wrapper">
+        <main className="wrapper app__wrapper">
           <h2 className="app__title">Pizza, die Sie lieben werden!</h2>
           <div className="app__catalog">
             {
               products.map((product) => {
-                return <Product
-                  key={product.id}
-                  product={product}
-                  currency={currency} />
+                return (
+                  <div key={product.id} className="app__product">
+                    <Product
+                      product={product}
+                      currency={currency} />
+                  </div>
+                );
               })
             }
           </div>
-        </div>
+        </main>
       </Fragment>
     );
   }

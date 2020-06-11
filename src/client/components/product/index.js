@@ -9,17 +9,43 @@ class Product extends React.Component {
   render () {
     const { product, currency: currentCurrency } = this.props;
 
+    const image = require(`../../assets/images/catalog/${product.id}-min.jpg`);
+    const size = `${product.size} cm`;
     const price = formatPrice(product.price[currentCurrency]);
     const currency = currencies[currentCurrency].title;
 
     return (
       <section className="product">
-        <h3 className="product__title">
-          {product.title}
-        </h3>
+        <img
+          className="product__image"
+          src={image}
+          alt={product.title} />
 
-        <div className="product__price">
-          {`${price} ${currency}`}
+        <div className="product__title-and-size">
+          <h3 className="product__title">
+            {product.title}
+          </h3>
+
+          <div className="product__size">
+            {size}
+          </div>
+        </div>
+
+        {
+          product.description &&
+          <p className="product__description">
+            {product.description}
+          </p>
+        }
+
+        <div className="product__price-and-button">
+          <div className="product__price">
+            {`${price} ${currency}`}
+          </div>
+
+          <div className="product__button">
+            In den Warenkorb
+          </div>
         </div>
       </section>
     );
@@ -28,8 +54,10 @@ class Product extends React.Component {
 
 Product.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
+    size: PropTypes.number.isRequired,
     price: PropTypes.shape({
       EUR: PropTypes.number.isRequired,
       USD: PropTypes.number.isRequired

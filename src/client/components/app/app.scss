@@ -3,9 +3,27 @@
 
 .app {
   &__title {
-    font-size: 1.2em;
+    margin: 2rem 0 2rem 0;
+    font-size: 2rem;
     line-height: 1.5;
     font-weight: bold;
     text-align: center;
+  }
+
+  &__catalog {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__product {
+    $marginBetweenProducts: 4em;
+
+    width: calc(100% / 4 - #{$marginBetweenProducts * 3 / 4});
+    margin-right: $marginBetweenProducts;
+    margin-bottom: $marginBetweenProducts;
+
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
   }
 }
