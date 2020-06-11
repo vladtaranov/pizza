@@ -16,6 +16,10 @@ body {
   padding: 0 2rem;
 }
 
+#root {
+  height: 100%;
+}
+
 @media screen and (max-width: $tabletBreakpoint) {
   .wrapper {
     padding: 0 1rem;

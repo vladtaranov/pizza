@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import actions from '../../actions';
 import Server from '../../services/server';
+import Spinner from '../spinner';
 import Header from '../header';
 
 class App extends React.Component {
@@ -36,6 +37,10 @@ class App extends React.Component {
   }
 
   render () {
+    const { isFetching } = this.state;
+
+    if (isFetching) return <Spinner />;
+
     return (
       <Fragment>
         <Header />
