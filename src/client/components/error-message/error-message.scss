@@ -1,0 +1,23 @@
+.error-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 30em;
+  height: 100%;
+  margin: 0 auto;
+  padding: 1em;
+  font-size: .9rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.error-message__title {
+  font-size: 1.2em;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.error-message__text {
+  margin-top: 1em;
+}

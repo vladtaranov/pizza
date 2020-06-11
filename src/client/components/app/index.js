@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 
 import actions from '../../actions';
 import Server from '../../services/server';
+import ErrorMessage from '../error-boundary';
 import Spinner from '../spinner';
 import Header from '../header';
 
@@ -37,9 +38,11 @@ class App extends React.Component {
   }
 
   render () {
-    const { isFetching } = this.state;
+    const { isFetching, hasFetchingError } = this.state;
 
     if (isFetching) return <Spinner />;
+
+    if (hasFetchingError) return <ErrorMessage />;
 
     return (
       <Fragment>
