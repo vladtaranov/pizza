@@ -34,3 +34,44 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
+
+@mixin primaryButton {
+  border: 1px solid transparent;
+  background: $gradientPrimary;
+  color: white;
+
+  &:hover {
+    opacity: .75;
+  }
+
+  @include button;
+}
+
+@mixin secondaryButton {
+  border: 1px solid $colorPrimary;
+  background: transparent;
+  color: $colorPrimary;
+
+  &:hover {
+    background: $gradientPrimary;
+    color: white;
+  }
+
+  @include button;
+}
+
+@mixin button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: .5em;
+  padding: 0 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  @include clickable;
+
+  &:hover {
+    border-color: transparent;
+    transition: background $transitionStandard;
+  }
+}

@@ -1,0 +1,85 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+  font-size: .9rem;
+  line-height: 1.5;
+
+  &__image {
+    width: 5em;
+    height: 5em;
+    margin-right: 1em;
+  }
+
+  &__info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title-and-size {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    margin-right: .5em;
+    font-weight: bold;
+  }
+
+  &__size {
+    font-size: .8rem;
+    color: #aaa;
+  }
+
+  &__count-container {
+    display: flex;
+    justify-content: space-between;
+    width: 7em;
+    margin-left: 1em;
+  }
+
+  &__count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+
+  &__dec,
+  &__inc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.75em;
+    height: 1.75em;
+    border: 1px solid $colorPrimary;
+    border-radius: 1em;
+    background: transparent;
+    font-size: 1.2rem;
+    font-weight: bold;
+    white-space: nowrap;
+    color: $colorPrimary;
+    cursor: pointer;
+    @include clickable;
+
+    &:hover {
+      border-color: transparent;
+      background: $gradientPrimary;
+      color: white;
+      transition: background $transitionStandard;
+    }
+  }
+
+  &__price {
+    width: 5rem;
+    margin-left: .5rem;
+    text-align: right;
+    white-space: nowrap;
+  }
+}

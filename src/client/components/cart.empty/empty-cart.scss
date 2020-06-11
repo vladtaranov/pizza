@@ -1,0 +1,22 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  &__title {
+    margin: 0 0 1em 0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+
+  &__return {
+    height: 3em;
+    font-size: .9rem;
+    @include primaryButton;
+  }
+}

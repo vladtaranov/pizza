@@ -1,9 +1,10 @@
 import actionTypes from '../constants/actionTypes';
 import currencies from '../constants/currencies';
+import frames from '../constants/frames';
 
 const initialState = {
   products: [],
-  frame: null,
+  frame: frames.NONE,
   currency: currencies.EUR.value,
   cart: {}
 };

@@ -1,0 +1,64 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  background: white;
+
+  &__title {
+    margin-bottom: 1em;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+
+  &__items {
+    margin-bottom: 3em;
+  }
+
+  &__delivery,
+  &__total {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    &-price {
+      width: 5rem;
+      margin-left: .5rem;
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+  &__delivery {
+    margin-bottom: 1.5em;
+    font-size: .9rem;
+  }
+
+  &__total {
+    margin-bottom: 2em;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  &__return {
+    height: 3em;
+    font-size: .9rem;
+    @include secondaryButton;
+  }
+
+  &__order {
+    height: 3em;
+    font-size: .9rem;
+    @include primaryButton;
+  }
+}

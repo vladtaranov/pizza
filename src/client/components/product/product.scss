@@ -48,25 +48,8 @@
   }
 
   &__button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 2.5em;
-    border: 1px solid $colorPrimary;
-    border-radius: .5em;
-    padding: 0 1em;
-    background: transparent;
     font-size: .85rem;
-    white-space: nowrap;
-    color: $colorPrimary;
-    cursor: pointer;
-    @include clickable;
-
-    &:hover {
-      border-color: transparent;
-      background: $gradientPrimary;
-      color: white;
-      transition: background $transitionStandard;
-    }
+    @include secondaryButton;
   }
 }

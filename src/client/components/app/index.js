@@ -5,10 +5,14 @@ import { bindActionCreators } from 'redux';
 
 import actions from '../../actions';
 import Server from '../../services/server';
+import frames from '../../constants/frames';
+
 import ErrorMessage from '../error-boundary';
 import Spinner from '../spinner';
 import Header from '../header';
 import Product from '../product';
+import Frame from '../frame';
+import Cart from '../cart';
 import './app.scss';
 
 class App extends React.Component {
@@ -39,10 +43,28 @@ class App extends React.Component {
     }
   }
 
+  renderFrameContent () {
+    const { products, frame, cart, currency, setFrame, addToCart, removeFromCart } = this.props;
+
+    switch (frame) {
+      case frames.CART:
+        return <Cart
+          products={products}
+          cart={cart}
+          currentCurrency={currency}
+          setFrame={setFrame}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart} />;
+      default:
+        return <Fragment />;
+    }
+  }
+
   render () {
     const { isFetching, hasFetchingError } = this.state;
     const {
       products,
+      frame,
       currency,
       cart,
       setFrame,
@@ -60,6 +82,14 @@ class App extends React.Component {
 
     return (
       <Fragment>
+        <Frame
+          currentFrame={frame}
+          setFrame={setFrame}>
+          {
+            this.renderFrameContent()
+          }
+        </Frame>
+
         <Header
           currency={currency}
           cartCount={cartCount}
@@ -91,6 +121,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    frame: state.frame,
     currency: state.currency,
     cart: state.cart
   };
@@ -108,6 +139,7 @@ const mapDispatchToProps = (dispatch) => {
 
 App.propTypes = {
   products: PropTypes.array.isRequired,
+  frame: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   cart: PropTypes.object.isRequired,
   saveProducts: PropTypes.func.isRequired,
