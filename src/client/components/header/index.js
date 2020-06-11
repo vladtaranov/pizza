@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { boundMethod } from 'autobind-decorator';
 
 import currencies from '../../constants/currencies';
+import frames from '../../constants/frames';
 import cn from 'classnames';
 import './header.scss';
 import './header.mobile.scss';
@@ -20,6 +21,12 @@ class Header extends React.Component {
     this.setState({
       isMobileMenuOpen: !this.state.isMobileMenuOpen
     });
+  }
+
+  @boundMethod
+  onCartClick () {
+    const { setFrame } = this.props;
+    setFrame(frames.CART);
   }
 
   render () {
@@ -87,7 +94,7 @@ class Header extends React.Component {
             </ul>
           </div>
 
-          <div className="header__cart">
+          <div className="header__cart" onClick={this.onCartClick}>
             <div className="header__cart-title">
               Warenkorb
             </div>
@@ -105,6 +112,7 @@ class Header extends React.Component {
 Header.propTypes = {
   currency: PropTypes.string.isRequired,
   cartCount: PropTypes.number.isRequired,
+  setFrame: PropTypes.func.isRequired,
   setCurrency: PropTypes.func.isRequired
 };
 

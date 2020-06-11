@@ -7,6 +7,13 @@ const saveProducts = (products) => {
   }
 };
 
+const setFrame = (frame) => {
+  return {
+    type: actionTypes.SET_FRAME,
+    payload: frame
+  }
+};
+
 const setCurrency = (currency) => {
   return {
     type: actionTypes.SET_CURRENCY,
@@ -30,6 +37,7 @@ const removeFromCart = (productId) => {
 
 export default {
   saveProducts,
+  setFrame,
   setCurrency,
   addToCart,
   removeFromCart

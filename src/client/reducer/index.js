@@ -3,6 +3,7 @@ import currencies from '../constants/currencies';
 
 const initialState = {
   products: [],
+  frame: null,
   currency: currencies.EUR.value,
   cart: {}
 };
@@ -11,6 +12,9 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_PRODUCTS:
       return saveProducts(state, action.payload);
+
+    case actionTypes.SET_FRAME:
+      return setFrame(state, action.payload);
 
     case actionTypes.SET_CURRENCY:
       return setCurrency(state, action.payload);
@@ -33,6 +37,13 @@ function saveProducts (state, products) {
   }
 }
 
+function setFrame (state, frame) {
+  return {
+    ...state,
+    frame
+  }
+}
+
 function setCurrency (state, currency) {
   return {
     ...state,
@@ -43,11 +54,9 @@ function setCurrency (state, currency) {
 function addToCart (state, productId) {
   const cart = Object.assign({}, state.cart);
 
-  if (typeof cart[productId] === 'number') {
-    cart[productId] += 1;
-  } else {
-    cart[productId] = 1;
-  }
+  typeof cart[productId] === 'number'
+    ? cart[productId] += 1
+    : cart[productId] = 1;
 
   return {
     ...state,
@@ -59,9 +68,9 @@ function removeFromCart (state, productId) {
   const cart = Object.assign({}, state.cart);
 
   if (typeof cart[productId] === 'number') {
-    if (cart[productId] > 1) {
-      cart[productId] -= 1;
-    }
+    cart[productId] > 1
+      ? cart[productId] -= 1
+      : delete cart[productId];
   }
 
   return {

@@ -41,7 +41,15 @@ class App extends React.Component {
 
   render () {
     const { isFetching, hasFetchingError } = this.state;
-    const { products, currency, cart, setCurrency, addToCart, removeFromCart } = this.props;
+    const {
+      products,
+      currency,
+      cart,
+      setFrame,
+      setCurrency,
+      addToCart,
+      removeFromCart
+    } = this.props;
 
     const cartCount = Object.values(cart)
       .reduce((sum, count) => sum + count, 0);
@@ -55,6 +63,7 @@ class App extends React.Component {
         <Header
           currency={currency}
           cartCount={cartCount}
+          setFrame={setFrame}
           setCurrency={setCurrency} />
 
         <main className="wrapper app__wrapper">
@@ -90,6 +99,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     saveProducts: bindActionCreators(actions.saveProducts, dispatch),
+    setFrame: bindActionCreators(actions.setFrame, dispatch),
     setCurrency: bindActionCreators(actions.setCurrency, dispatch),
     addToCart: bindActionCreators(actions.addToCart, dispatch),
     removeFromCart: bindActionCreators(actions.removeFromCart, dispatch)
@@ -101,6 +111,7 @@ App.propTypes = {
   currency: PropTypes.string.isRequired,
   cart: PropTypes.object.isRequired,
   saveProducts: PropTypes.func.isRequired,
+  setFrame: PropTypes.func.isRequired,
   setCurrency: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
   removeFromCart: PropTypes.func.isRequired

@@ -3,6 +3,7 @@ export default {
   SAVE_PRODUCTS: 'SAVE_PRODUCTS',
 
   // Interface
+  SET_FRAME: 'SET_FRAME',
   SET_CURRENCY: 'SET_CURRENCY',
 
   // Cart
