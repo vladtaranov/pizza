@@ -1,12 +1,26 @@
 import React, { Fragment } from 'react';
 
+import Server from '../../services/server';
 import Header from '../header';
 
 class App extends React.Component {
+  constructor (props) {
+    super(props);
+    this.server = new Server();
+
+    this.state = {
+      products: []
+    };
+  }
+
   async componentDidMount () {
-    const res = await fetch('/api');
-    const r = await res.json();
-    console.log(r);
+    try {
+      const products = await this.server.getAllProducts();
+      console.log(products);
+      this.setState({ products });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render () {
