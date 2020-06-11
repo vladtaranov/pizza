@@ -2,6 +2,10 @@
 @import '../../assets/style/mixins';
 
 .app {
+  &__wrapper {
+    padding-top: 3.5rem;
+  }
+
   &__title {
     margin: 2rem 0 2rem 0;
     font-size: 2rem;

@@ -2,12 +2,12 @@
 @import '../../assets/style/mixins';
 
 .header {
-  position: sticky;
+  position: fixed;
   z-index: 800;
   top: 0;
   left: 0;
   width: 100%;
-  height: 4em;
+  height: 3.5rem;
   border-bottom: 1px solid #ddd;
   background: white;
   font-size: .9rem;
@@ -115,7 +115,7 @@
     background: $gradientPrimary;
     margin-left: 1.5em;
     border-radius: .5em;
-    padding: 0 1em;
+    padding: 0 .5em 0 1em;
     color: white;
     cursor: pointer;
     @include clickable;
@@ -132,8 +132,9 @@
     }
 
     &-count {
+      justify-content: center;
+      width: 2em;
       border-left: 1px solid rgba(white, .75);
-      padding-left: .5em;
     }
 
     &:hover {

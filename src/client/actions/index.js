@@ -14,7 +14,23 @@ const setCurrency = (currency) => {
   }
 };
 
+const addToCart = (productId) => {
+  return {
+    type: actionTypes.ADD_TO_CART,
+    payload: productId
+  }
+};
+
+const removeFromCart = (productId) => {
+  return {
+    type: actionTypes.REMOVE_FROM_CART,
+    payload: productId
+  }
+};
+
 export default {
   saveProducts,
-  setCurrency
+  setCurrency,
+  addToCart,
+  removeFromCart
 }

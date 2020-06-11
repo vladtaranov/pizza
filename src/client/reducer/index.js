@@ -3,7 +3,8 @@ import currencies from '../constants/currencies';
 
 const initialState = {
   products: [],
-  currency: currencies.EUR.value
+  currency: currencies.EUR.value,
+  cart: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,12 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.SET_CURRENCY:
       return setCurrency(state, action.payload);
+
+    case actionTypes.ADD_TO_CART:
+      return addToCart(state, action.payload);
+
+    case actionTypes.REMOVE_FROM_CART:
+      return removeFromCart(state, action.payload);
 
     default:
       return state;
@@ -30,6 +37,36 @@ function setCurrency (state, currency) {
   return {
     ...state,
     currency
+  }
+}
+
+function addToCart (state, productId) {
+  const cart = Object.assign({}, state.cart);
+
+  if (typeof cart[productId] === 'number') {
+    cart[productId] += 1;
+  } else {
+    cart[productId] = 1;
+  }
+
+  return {
+    ...state,
+    cart
+  }
+}
+
+function removeFromCart (state, productId) {
+  const cart = Object.assign({}, state.cart);
+
+  if (typeof cart[productId] === 'number') {
+    if (cart[productId] > 1) {
+      cart[productId] -= 1;
+    }
+  }
+
+  return {
+    ...state,
+    cart
   }
 }
 

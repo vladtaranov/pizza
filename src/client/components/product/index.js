@@ -5,52 +5,60 @@ import currencies from '../../constants/currencies';
 import { formatPrice } from '../../utils/formatters';
 import './product.scss';
 
-class Product extends React.Component {
-  render () {
-    const { product, currency: currentCurrency } = this.props;
+const Product = (props) => {
+  const { product, currency: currentCurrency, addToCart } = props;
 
-    const image = require(`../../assets/images/catalog/${product.id}-min.jpg`);
-    const size = `${product.size} cm`;
-    const price = formatPrice(product.price[currentCurrency]);
-    const currency = currencies[currentCurrency].title;
+  const image = require(`../../assets/images/catalog/${product.id}-min.jpg`);
+  const size = `${product.size} cm`;
+  const price = formatPrice(product.price[currentCurrency]);
+  const currency = currencies[currentCurrency].title;
 
-    return (
-      <section className="product">
-        <img
-          className="product__image"
-          src={image}
-          alt={product.title} />
+  const onImageClick = () => {
+    addToCart(product.id);
+  };
+  const onButtonClick = () => {
+    addToCart(product.id);
+  };
 
-        <div className="product__title-and-size">
-          <h3 className="product__title">
-            {product.title}
-          </h3>
+  return (
+    <section className="product">
+      <img
+        className="product__image"
+        src={image}
+        alt={product.title}
+        onClick={onImageClick} />
 
-          <div className="product__size">
-            {size}
-          </div>
+      <div className="product__title-and-size">
+        <h3 className="product__title">
+          {product.title}
+        </h3>
+
+        <div className="product__size">
+          {size}
+        </div>
+      </div>
+
+      {
+        product.description &&
+        <p className="product__description">
+          {product.description}
+        </p>
+      }
+
+      <div className="product__price-and-button">
+        <div className="product__price">
+          {`${price} ${currency}`}
         </div>
 
-        {
-          product.description &&
-          <p className="product__description">
-            {product.description}
-          </p>
-        }
-
-        <div className="product__price-and-button">
-          <div className="product__price">
-            {`${price} ${currency}`}
-          </div>
-
-          <div className="product__button">
-            In den Warenkorb
-          </div>
+        <div
+          className="product__button"
+          onClick={onButtonClick}>
+          In den Warenkorb
         </div>
-      </section>
-    );
-  }
-}
+      </div>
+    </section>
+  );
+};
 
 Product.propTypes = {
   product: PropTypes.shape({
@@ -63,7 +71,8 @@ Product.propTypes = {
       USD: PropTypes.number.isRequired
     }).isRequired
   }).isRequired,
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string.isRequired,
+  addToCart: PropTypes.func.isRequired
 };
 
 export default Product;

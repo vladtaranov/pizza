@@ -23,7 +23,10 @@ class Header extends React.Component {
   }
 
   render () {
-    const { currency: currentCurrency, setCurrency } = this.props;
+    const {
+      currency: currentCurrency,
+      cartCount,
+      setCurrency } = this.props;
 
     const menuIconStyle = cn(
       'header__menu-icon',
@@ -89,7 +92,7 @@ class Header extends React.Component {
               Warenkorb
             </div>
             <div className="header__cart-count">
-              0
+              {cartCount}
             </div>
           </div>
 
@@ -101,6 +104,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   currency: PropTypes.string.isRequired,
+  cartCount: PropTypes.number.isRequired,
   setCurrency: PropTypes.func.isRequired
 };
 

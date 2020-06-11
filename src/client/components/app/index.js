@@ -41,7 +41,10 @@ class App extends React.Component {
 
   render () {
     const { isFetching, hasFetchingError } = this.state;
-    const { products, currency, setCurrency } = this.props;
+    const { products, currency, cart, setCurrency, addToCart, removeFromCart } = this.props;
+
+    const cartCount = Object.values(cart)
+      .reduce((sum, count) => sum + count, 0);
 
     if (isFetching) return <Spinner />;
 
@@ -51,6 +54,7 @@ class App extends React.Component {
       <Fragment>
         <Header
           currency={currency}
+          cartCount={cartCount}
           setCurrency={setCurrency} />
 
         <main className="wrapper app__wrapper">
@@ -62,7 +66,8 @@ class App extends React.Component {
                   <div key={product.id} className="app__product">
                     <Product
                       product={product}
-                      currency={currency} />
+                      currency={currency}
+                      addToCart={addToCart} />
                   </div>
                 );
               })
@@ -77,22 +82,28 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
-    currency: state.currency
+    currency: state.currency,
+    cart: state.cart
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     saveProducts: bindActionCreators(actions.saveProducts, dispatch),
-    setCurrency: bindActionCreators(actions.setCurrency, dispatch)
+    setCurrency: bindActionCreators(actions.setCurrency, dispatch),
+    addToCart: bindActionCreators(actions.addToCart, dispatch),
+    removeFromCart: bindActionCreators(actions.removeFromCart, dispatch)
   };
 };
 
 App.propTypes = {
   products: PropTypes.array.isRequired,
   currency: PropTypes.string.isRequired,
+  cart: PropTypes.object.isRequired,
   saveProducts: PropTypes.func.isRequired,
-  setCurrency: PropTypes.func.isRequired
+  setCurrency: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired
 };
 
 export default connect(
