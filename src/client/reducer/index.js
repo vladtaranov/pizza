@@ -8,11 +8,11 @@ const initialState = {
   currency: currencies.EUR.value,
   cart: {},
   order: {
-    name: 'fwe we',
-    street: 'efwf we ',
-    zip: '435',
-    phone: '2343',
-    comment: 'dsvef'
+    name: '',
+    street: '',
+    zip: '',
+    phone: '',
+    comment: ''
   }
 };
 

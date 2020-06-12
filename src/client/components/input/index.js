@@ -42,7 +42,7 @@ const Input = (props) => {
         className={inputStyle}
         type={type}
         name={name}
-        defaultValue={value}
+        value={value}
         placeholder={placeholder}
         inputMode={inputMode}
         onChange={onChange} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import frames from '../../constants/frames';
+import {validateValue} from '../../utils/validate';
 import Input from '../input';
 import TextArea from '../textarea';
 import './order.scss';
@@ -14,12 +15,23 @@ const Order = ({ order, updateOrder, setFrame }) => {
     setFrame(frames.ORDER_SUCCESS);
   };
 
-  const validateData = () => {
-
+  const onOrderChange = () => {
+    updateOrder(validateData());
   };
 
-  const onChange = () => {
-    console.log('12')
+  const validateData = () => {
+    const form = document.forms.order;
+    return {
+      name: validateValue(
+        form.name.value, new RegExp('[A-Za-z -.]')),
+      street: validateValue(
+        form.street.value, new RegExp('[A-Za-z0-9,./ -]')),
+      zip: validateValue(
+        form.zip.value, new RegExp('[0-9-]')),
+      phone: validateValue(
+        form.phone.value, new RegExp('[0-9+() -]')),
+      comment: form.comment.value
+    };
   };
 
   return (
@@ -36,7 +48,7 @@ const Order = ({ order, updateOrder, setFrame }) => {
           value={order.name}
           placeholder='Name'
           caption='Pflichtfeld'
-          onChange={onChange} />
+          onChange={onOrderChange} />
 
         <div className="order__street-and-zip">
           <Input
@@ -46,7 +58,7 @@ const Order = ({ order, updateOrder, setFrame }) => {
             value={order.street}
             placeholder='Straße'
             caption='Pflichtfeld'
-            onChange={onChange} />
+            onChange={onOrderChange} />
 
           <Input
             style='order__zip'
@@ -56,7 +68,7 @@ const Order = ({ order, updateOrder, setFrame }) => {
             placeholder='Postleitzahl'
             caption='Pflichtfeld'
             inputMode='numeric'
-            onChange={onChange} />
+            onChange={onOrderChange} />
         </div>
 
         <Input
@@ -67,7 +79,7 @@ const Order = ({ order, updateOrder, setFrame }) => {
           placeholder='Telefon'
           caption='Pflichtfeld'
           inputMode='tel'
-          onChange={onChange} />
+          onChange={onOrderChange} />
 
         <TextArea
           style='order__comment'
@@ -76,7 +88,7 @@ const Order = ({ order, updateOrder, setFrame }) => {
           value={order.comment}
           placeholder='Anmerkungen zur Ihre Bestellung'
           rows={4}
-          onChange={onChange} />
+          onChange={onOrderChange} />
       </div>
 
       <div className="order__buttons">
