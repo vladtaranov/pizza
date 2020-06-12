@@ -1,0 +1,28 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.textarea {
+  display: block;
+  line-height: 1.5;
+
+  &__title-and-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .3em;
+  }
+
+  &__title {
+    font-size: .9rem;
+    font-weight: bold;
+  }
+
+  &__caption {
+    font-size: .8rem;
+    color: #aaa;
+  }
+
+  &__input {
+    @include textField(.9rem);
+  }
+}
