@@ -25,7 +25,8 @@ module.exports = (env = {}) => {
     const plugins = [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: Path.join(paths.DEV, paths.CLIENT, 'index.html')
+        template: Path.join(paths.DEV, paths.CLIENT, 'index.html'),
+        favicon: Path.join(paths.DEV, paths.CLIENT, paths.ASSETS, 'favicon', 'favicon.png')
       })
     ];
 
