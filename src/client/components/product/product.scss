@@ -58,6 +58,7 @@
 @media screen and (max-width: $mobileBreakpoint) {
   .product {
     &__image {
+      width: calc(100% - 9px);
       margin-left: 8px;
     }
 
