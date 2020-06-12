@@ -94,7 +94,9 @@ class Header extends React.Component {
             </ul>
           </div>
 
-          <div className="header__cart" onClick={this.onCartClick}>
+          <div
+            className="header__cart js__header-cart"
+            onClick={this.onCartClick}>
             <div className="header__cart-title">
               Warenkorb
             </div>

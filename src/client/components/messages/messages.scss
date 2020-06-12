@@ -1,0 +1,35 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.messages {
+  position: fixed;
+  z-index: 12000;
+  top: 4rem;
+  width: 15em;
+  font-size: .8rem;
+  line-height: 1.5;
+  color: white;
+  @include notClickable;
+
+  &__item {
+    width: 100%;
+    margin-bottom: .5em;
+    border-radius: .5em;
+    padding: .5em 1em;
+    background: $gradientPrimary;
+    transition: all $transitionStandard;
+
+    &:last-child {
+      margin: 0;
+    }
+
+    &.is-disappearing {
+      animation: message-animation .5s ease;
+    }
+  }
+}
+
+@keyframes message-animation {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

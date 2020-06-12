@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import currencies from '../../constants/currencies';
@@ -13,50 +13,73 @@ const Product = (props) => {
   const price = formatPrice(product.price[currentCurrency]);
   const currency = currencies[currentCurrency].title;
 
-  const onImageClick = () => {
+  const onAddedCLick = () => {
     addToCart(product.id);
+    showMessage();
   };
-  const onButtonClick = () => {
-    addToCart(product.id);
+
+  const showMessage = () => {
+    if (document.body.clientWidth > 900) {
+      const rightMargin = document.body.clientWidth -
+        document.querySelector('.js__header-cart').getBoundingClientRect().right;
+      document.querySelector('.js__messages')
+        .style.right = `${rightMargin}px`;
+    }
+
+    const message = document.createElement('li');
+    message.classList.add('messages__item');
+    message.innerHTML = `${product.title} hinzugefügt`;
+    document.querySelector('.js__messages')
+      .append(message);
+
+    setInterval(() => {
+      message.classList.add('is-disappearing');
+    }, 1500);
+
+    setInterval(() => {
+      message.remove();
+    }, 2000);
   };
 
   return (
-    <section className="product">
-      <img
-        className="product__image"
-        src={image}
-        alt={product.title}
-        onClick={onImageClick} />
+    <Fragment>
+      <section className="product">
+        <img
+          className="product__image"
+          src={image}
+          alt={product.title}
+          onClick={onAddedCLick} />
 
-      <div className="product__title-and-size">
-        <h3 className="product__title">
-          {product.title}
-        </h3>
+        <div className="product__title-and-size">
+          <h3 className="product__title">
+            {product.title}
+          </h3>
 
-        <div className="product__size">
-          {size}
-        </div>
-      </div>
-
-      {
-        product.description &&
-        <p className="product__description">
-          {product.description}
-        </p>
-      }
-
-      <div className="product__price-and-button">
-        <div className="product__price">
-          {`${price} ${currency}`}
+          <div className="product__size">
+            {size}
+          </div>
         </div>
 
-        <div
-          className="product__button"
-          onClick={onButtonClick}>
-          In den Warenkorb
+        {
+          product.description &&
+          <p className="product__description">
+            {product.description}
+          </p>
+        }
+
+        <div className="product__price-and-button">
+          <div className="product__price">
+            {`${price} ${currency}`}
+          </div>
+
+          <div
+            className="product__button"
+            onClick={onAddedCLick}>
+            In den Warenkorb
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Fragment>
   );
 };
 

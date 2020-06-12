@@ -4,7 +4,7 @@ import frames from '../constants/frames';
 
 const initialState = {
   products: [],
-  frame: frames.ORDER_SUCCESS,
+  frame: frames.NONE,
   currency: currencies.EUR.value,
   cart: {},
   order: {

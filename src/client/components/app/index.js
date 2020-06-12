@@ -11,6 +11,7 @@ import Spinner from '../spinner';
 import Header from '../header';
 import Product from '../product';
 import Frame from '../frame';
+import Messages from '../messages';
 import './app.scss';
 
 class App extends React.Component {
@@ -75,6 +76,8 @@ class App extends React.Component {
           addToCart={addToCart}
           removeFromCart={removeFromCart}
           updateOrder={updateOrder} />
+
+        <Messages />
 
         <Header
           currency={currency}
