@@ -36,6 +36,7 @@
   }
 
   &__description {
+    min-height: 3em;
     font-size: .9rem;
     line-height: 1.5;
   }
@@ -44,12 +45,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1em;
+    margin-top: .5em;
   }
 
   &__button {
     height: 2.5em;
     font-size: .85rem;
     @include secondaryButton;
+  }
+}
+
+@media screen and (max-width: $mobileBreakpoint) {
+  .product {
+    &__image {
+      margin-left: 8px;
+    }
+
+    &__description {
+      min-height: auto;
+    }
   }
 }

@@ -84,3 +84,38 @@
     white-space: nowrap;
   }
 }
+
+@media screen and (max-width: $mobileBreakpoint) {
+  .cart-item {
+    flex-direction: column;
+    margin-bottom: 3em;
+
+    &__image {
+      width: 10em;
+      height: 10em;
+      margin: 0 0 1em 0;
+    }
+
+    &__title-and-size {
+      justify-content: center;
+    }
+
+    &__info {
+      margin-bottom: .5em;
+    }
+
+    &__description {
+      text-align: center;
+    }
+
+    &__count-container,
+    &__price {
+      margin-left: 0;
+      text-align: center;
+    }
+
+    &__count-container {
+      margin-bottom: .5em;
+    }
+  }
+}

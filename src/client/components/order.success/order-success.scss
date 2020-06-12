@@ -28,3 +28,9 @@
     @include primaryButton;
   }
 }
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .order-success {
+    width: 100%;
+  }
+}

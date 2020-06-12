@@ -20,6 +20,9 @@ const Frame = (props) => {
     removeFromCart,
     updateOrder
   } = props;
+  currentFrame === frames.NONE
+    ? document.body.classList.remove('is-blocked')
+    : document.body.classList.add('is-blocked');
 
   const frameStyle = cn(
     'frame',

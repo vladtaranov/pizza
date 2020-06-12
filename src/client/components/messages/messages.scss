@@ -6,9 +6,11 @@
   z-index: 12000;
   top: 4rem;
   width: 15em;
+  max-width: 280px;
   font-size: .8rem;
   line-height: 1.5;
   color: white;
+  pointer-events: none;
   @include notClickable;
 
   &__item {
@@ -32,4 +34,13 @@
 @keyframes message-animation {
   0% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .messages {
+    top: auto;
+    bottom: 2rem;
+    left: calc(50% - 10em);
+    width: 20em;
+  }
 }

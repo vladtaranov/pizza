@@ -82,6 +82,7 @@ class App extends React.Component {
         <Header
           currency={currency}
           cartCount={cartCount}
+          currentFrame={frame}
           setFrame={setFrame}
           setCurrency={setCurrency} />
 

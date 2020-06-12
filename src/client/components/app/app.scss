@@ -1,6 +1,11 @@
 @import '../../assets/style/constants';
 @import '../../assets/style/mixins';
 
+@mixin productWidth($columnCount, $marginBetweenProducts) {
+  width: calc(100% / #{$columnCount} -
+    #{$marginBetweenProducts} * #{$columnCount - 1} / #{$columnCount});
+}
+
 .app {
   &__wrapper {
     padding-top: 3.5rem;
@@ -22,12 +27,62 @@
   &__product {
     $marginBetweenProducts: 4em;
 
-    width: calc(100% / 4 - #{$marginBetweenProducts * 3 / 4});
     margin-right: $marginBetweenProducts;
     margin-bottom: $marginBetweenProducts;
+    @include productWidth(4, $marginBetweenProducts);
 
     &:nth-child(4n) {
       margin-right: 0;
+    }
+  }
+}
+
+@media screen and (max-width: $smallDesktopBreakpoint) {
+  .app {
+    &__product {
+      $marginBetweenProducts: 4em;
+      @include productWidth(3, $marginBetweenProducts);
+
+      &:nth-child(4n) {
+        margin-right: $marginBetweenProducts;
+      }
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .app {
+    &__product {
+      $marginBetweenProducts: 2em;
+      margin-right: $marginBetweenProducts;
+      @include productWidth(2, $marginBetweenProducts);
+
+      &:nth-child(3n) {
+        margin-right: $marginBetweenProducts;
+      }
+
+      &:nth-child(2n) {
+        margin-right: 0;
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: $mobileBreakpoint) {
+  .app {
+    &__title {
+      margin-top: 1em;
+      font-size: 1.4rem;
+    }
+
+    &__product {
+      width: 100%;
+      margin-right: 0!important;
     }
   }
 }

@@ -33,3 +33,19 @@
     background: white;
   }
 }
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .frame {
+    top: 2.7rem;
+    padding: 0;
+
+    &__content {
+      display: block;
+      min-height: 100%;
+      margin: 0;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 2em 1em;
+    }
+  }
+}

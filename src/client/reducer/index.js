@@ -4,9 +4,11 @@ import frames from '../constants/frames';
 
 const initialState = {
   products: [],
-  frame: frames.NONE,
+  frame: frames.CART,
   currency: currencies.EUR.value,
-  cart: {},
+  cart: {
+    '2': 4
+  },
   order: {
     name: '',
     street: '',

@@ -3,6 +3,7 @@
 
 @media screen and (max-width: $tabletBreakpoint) {
   .header {
+    z-index: 9000;
     height: 3em;
 
     &__menu-icon {
@@ -32,17 +33,6 @@
 
     &__cart {
       height: 2em;
-
-      @media screen and (max-width: 400px) {
-        &-title {
-          display: none;
-        }
-
-        &-count {
-          border: none;
-          padding: 0;
-        }
-      }
     }
 
     &__mobile-menu {
@@ -64,7 +54,7 @@
 
       &.is-open {
         display: flex;
-        z-index: 900;
+        z-index: 19000;
         top: 3em;
         visibility: visible;
         opacity: 1;
@@ -101,6 +91,23 @@
 
       &-item {
         margin: 0 .5em;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mobileBreakpoint) {
+  .header {
+    &__cart {
+      padding: 0 .5em;
+
+      &-title {
+        display: none;
+      }
+
+      &-count {
+        border: none;
+        padding: 0;
       }
     }
   }

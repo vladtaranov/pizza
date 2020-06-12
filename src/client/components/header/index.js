@@ -25,8 +25,10 @@ class Header extends React.Component {
 
   @boundMethod
   onCartClick () {
-    const { setFrame } = this.props;
-    setFrame(frames.CART);
+    const { currentFrame, setFrame } = this.props;
+    currentFrame === frames.CART
+      ? setFrame(frames.NONE)
+      : setFrame(frames.CART);
   }
 
   render () {
@@ -114,6 +116,7 @@ class Header extends React.Component {
 Header.propTypes = {
   currency: PropTypes.string.isRequired,
   cartCount: PropTypes.number.isRequired,
+  currentFrame: PropTypes.string.isRequired,
   setFrame: PropTypes.func.isRequired,
   setCurrency: PropTypes.func.isRequired
 };

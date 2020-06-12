@@ -60,3 +60,12 @@
     @include primaryButton;
   }
 }
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .order {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 3em;
+  }
+}
