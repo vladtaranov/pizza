@@ -11,10 +11,12 @@ const Frame = (props) => {
     products,
     currentFrame,
     cart,
+    order,
     currency,
     setFrame,
     addToCart,
-    removeFromCart
+    removeFromCart,
+    updateOrder
   } = props;
 
   const frameStyle = cn(
@@ -41,6 +43,8 @@ const Frame = (props) => {
 
       case frames.ORDER:
         return <Order
+          order={order}
+          updateOrder={updateOrder}
           setFrame={setFrame} />;
 
       default:
@@ -65,10 +69,12 @@ Frame.propTypes = {
   products: PropTypes.array.isRequired,
   currentFrame: PropTypes.string.isRequired,
   cart: PropTypes.object.isRequired,
+  order: PropTypes.object.isRequired,
   currency: PropTypes.string.isRequired,
   setFrame: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
-  removeFromCart: PropTypes.func.isRequired
+  removeFromCart: PropTypes.func.isRequired,
+  updateOrder: PropTypes.func.isRequired
 };
 
 export default Frame;

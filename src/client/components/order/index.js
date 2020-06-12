@@ -5,7 +5,7 @@ import Input from '../input';
 import TextArea from '../textarea';
 import './order.scss';
 
-const Order = ({ setFrame }) => {
+const Order = ({ order, updateOrder, setFrame }) => {
   const onReturnClick = () => {
     setFrame(frames.CART);
   };
@@ -16,6 +16,10 @@ const Order = ({ setFrame }) => {
 
   const validateData = () => {
 
+  };
+
+  const onChange = () => {
+    console.log('12')
   };
 
   return (
@@ -29,40 +33,50 @@ const Order = ({ setFrame }) => {
           style='order__name'
           name='name'
           title='Name'
+          value={order.name}
           placeholder='Name'
-          caption='Pflichtfeld' />
+          caption='Pflichtfeld'
+          onChange={onChange} />
 
         <div className="order__street-and-zip">
           <Input
             style='order__street'
             name='street'
             title='Straße'
+            value={order.street}
             placeholder='Straße'
-            caption='Pflichtfeld' />
+            caption='Pflichtfeld'
+            onChange={onChange} />
 
           <Input
             style='order__zip'
             name='zip'
             title='Postleitzahl'
+            value={order.zip}
             placeholder='Postleitzahl'
             caption='Pflichtfeld'
-            inputMode='numeric' />
+            inputMode='numeric'
+            onChange={onChange} />
         </div>
 
         <Input
           style='order__phone'
           name='phone'
           title='Telefon'
+          value={order.phone}
           placeholder='Telefon'
           caption='Pflichtfeld'
-          inputMode='tel' />
+          inputMode='tel'
+          onChange={onChange} />
 
         <TextArea
           style='order__comment'
           name='comment'
           title='Hinweise'
+          value={order.comment}
           placeholder='Anmerkungen zur Ihre Bestellung'
-          rows={4} />
+          rows={4}
+          onChange={onChange} />
       </div>
 
       <div className="order__buttons">
@@ -83,6 +97,14 @@ const Order = ({ setFrame }) => {
 };
 
 Order.propTypes = {
+  order: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    street: PropTypes.string.isRequired,
+    zip: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired
+  }).isRequired,
+  updateOrder: PropTypes.func.isRequired,
   setFrame: PropTypes.func.isRequired
 };
 

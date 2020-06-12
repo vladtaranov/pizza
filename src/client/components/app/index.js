@@ -48,10 +48,12 @@ class App extends React.Component {
       frame,
       currency,
       cart,
+      order,
       setFrame,
       setCurrency,
       addToCart,
-      removeFromCart
+      removeFromCart,
+      updateOrder
     } = this.props;
 
     const cartCount = Object.values(cart)
@@ -66,11 +68,13 @@ class App extends React.Component {
         <Frame
           products={products}
           cart={cart}
+          order={order}
           currentFrame={frame}
           currency={currency}
           setFrame={setFrame}
           addToCart={addToCart}
-          removeFromCart={removeFromCart} />
+          removeFromCart={removeFromCart}
+          updateOrder={updateOrder} />
 
         <Header
           currency={currency}
@@ -79,7 +83,10 @@ class App extends React.Component {
           setCurrency={setCurrency} />
 
         <main className="wrapper app__wrapper">
-          <h2 className="app__title">Pizza, die Sie lieben werden!</h2>
+          <h2 className="app__title">
+            Pizza, die Sie lieben werden!
+          </h2>
+
           <div className="app__catalog">
             {
               products.map((product) => {
@@ -105,7 +112,8 @@ const mapStateToProps = (state) => {
     products: state.products,
     frame: state.frame,
     currency: state.currency,
-    cart: state.cart
+    cart: state.cart,
+    order: state.order
   };
 };
 
@@ -115,7 +123,8 @@ const mapDispatchToProps = (dispatch) => {
     setFrame: bindActionCreators(actions.setFrame, dispatch),
     setCurrency: bindActionCreators(actions.setCurrency, dispatch),
     addToCart: bindActionCreators(actions.addToCart, dispatch),
-    removeFromCart: bindActionCreators(actions.removeFromCart, dispatch)
+    removeFromCart: bindActionCreators(actions.removeFromCart, dispatch),
+    updateOrder: bindActionCreators(actions.updateOrder, dispatch)
   };
 };
 
@@ -124,11 +133,13 @@ App.propTypes = {
   frame: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   cart: PropTypes.object.isRequired,
+  order: PropTypes.object.isRequired,
   saveProducts: PropTypes.func.isRequired,
   setFrame: PropTypes.func.isRequired,
   setCurrency: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
-  removeFromCart: PropTypes.func.isRequired
+  removeFromCart: PropTypes.func.isRequired,
+  updateOrder: PropTypes.func.isRequired
 };
 
 export default connect(

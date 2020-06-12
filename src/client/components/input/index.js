@@ -13,7 +13,8 @@ const Input = (props) => {
     inputMode,
     title,
     caption,
-    hasError
+    hasError,
+    onChange
   } = props;
 
   const containerStyle = cn(
@@ -43,7 +44,8 @@ const Input = (props) => {
         name={name}
         defaultValue={value}
         placeholder={placeholder}
-        inputMode={inputMode} />
+        inputMode={inputMode}
+        onChange={onChange} />
     </label>
   );
 };
@@ -62,7 +64,8 @@ Input.propTypes = {
   inputMode: PropTypes.string,
   title: PropTypes.string.isRequired,
   caption: PropTypes.string,
-  hasError: PropTypes.bool
+  hasError: PropTypes.bool,
+  onChange: PropTypes.func.isRequired
 };
 
 export default Input;

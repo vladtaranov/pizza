@@ -12,7 +12,8 @@ const TextArea = (props) => {
     title,
     caption,
     rows,
-    hasError
+    hasError,
+    onChange
   } = props;
 
   const containerStyle = cn(
@@ -41,7 +42,8 @@ const TextArea = (props) => {
         name={name}
         defaultValue={value}
         placeholder={placeholder}
-        rows={rows}/>
+        rows={rows}
+        onChange={onChange} />
     </label>
   );
 };
@@ -58,7 +60,8 @@ TextArea.propTypes = {
   title: PropTypes.string.isRequired,
   caption: PropTypes.string,
   rows: PropTypes.number,
-  hasError: PropTypes.bool
+  hasError: PropTypes.bool,
+  onChange: PropTypes.func.isRequired
 };
 
 export default TextArea;
