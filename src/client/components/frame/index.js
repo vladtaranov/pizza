@@ -5,10 +5,6 @@ import cn from 'classnames';
 import './frame.scss';
 
 const Frame = ({ children, currentFrame, setFrame }) => {
-  currentFrame !== frames.NONE
-    ? document.body.classList.add('is-blocked')
-    : document.body.classList.remove('is-blocked');
-
   const frameStyle = cn(
     'frame',
     { 'is-visible': currentFrame !== frames.NONE }
