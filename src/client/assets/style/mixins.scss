@@ -30,7 +30,7 @@
   @include font('Material Icons');
 }
 
-@mixin clickable {
+@mixin notClickable {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -68,7 +68,7 @@
   padding: 0 1rem;
   white-space: nowrap;
   cursor: pointer;
-  @include clickable;
+  @include notClickable;
 
   &:hover {
     border-color: transparent;

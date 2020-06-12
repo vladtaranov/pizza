@@ -67,7 +67,7 @@
     white-space: nowrap;
     color: $colorPrimary;
     cursor: pointer;
-    @include clickable;
+    @include notClickable;
 
     &:hover {
       border-color: transparent;

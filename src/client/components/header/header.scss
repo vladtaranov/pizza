@@ -43,7 +43,7 @@
     height: 100%;
     margin-right: 2em;
     cursor: pointer;
-    @include clickable;
+    @include notClickable;
 
     &:hover {
       color: $colorPrimary;
@@ -61,7 +61,7 @@
     text-transform: uppercase;
     white-space: nowrap;
     @include font('Intro');
-    @include clickable;
+    @include notClickable;
 
     & span {
       border-bottom: .2em solid $colorBlack;
@@ -94,7 +94,7 @@
       margin-left: .25em;
       border-radius: .5em;
       cursor: pointer;
-      @include clickable;
+      @include notClickable;
 
       &.is-active {
         cursor: default;
@@ -118,7 +118,7 @@
     padding: 0 .5em 0 1em;
     color: white;
     cursor: pointer;
-    @include clickable;
+    @include notClickable;
 
     &-title,
     &-count {

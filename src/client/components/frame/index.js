@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+
 import frames from '../../constants/frames';
 import Cart from '../cart';
 import Order from '../order';
+import OrderSuccess from '../order.success';
 import cn from 'classnames';
 import './frame.scss';
 
@@ -45,6 +47,10 @@ const Frame = (props) => {
         return <Order
           order={order}
           updateOrder={updateOrder}
+          setFrame={setFrame} />;
+
+      case frames.ORDER_SUCCESS:
+        return <OrderSuccess
           setFrame={setFrame} />;
 
       default:

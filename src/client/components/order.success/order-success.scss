@@ -1,0 +1,30 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.order-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 320px;
+
+  &__icon {
+    margin-bottom: 1rem;
+    font-size: 4rem;
+    color: $colorPrimary;
+    @include notClickable;
+    @include font('Material icons');
+  }
+
+  &__title {
+    margin: 0 0 1em 0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+
+  &__return {
+    height: 3em;
+    font-size: .9rem;
+    @include primaryButton;
+  }
+}
