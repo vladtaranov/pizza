@@ -12,6 +12,7 @@
   padding: 2em 2em 4em 2em;
   opacity: 0;
   visibility: hidden;
+  text-align: center;
 
   &.is-visible {
     z-index: 9000;
@@ -22,10 +23,8 @@
   }
 
   &__content {
-    display: flex;
+    display: inline-block;
     z-index: 9010;
-    width: 100%;
-    max-width: 40em;
     min-height: 20em;
     margin: 2rem auto;
     box-shadow: 0 0 1em $colorBlack;

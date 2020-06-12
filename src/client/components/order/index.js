@@ -1,56 +1,97 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { boundMethod } from 'autobind-decorator';
+import isEqual from 'lodash.isequal';
+
 import frames from '../../constants/frames';
-import {validateValue} from '../../utils/validate';
+import validateOrder from '../../services/validateOrder';
 import Input from '../input';
 import TextArea from '../textarea';
 import './order.scss';
 
-const Order = ({ order, updateOrder, setFrame }) => {
-  const onReturnClick = () => {
+class Order extends React.Component {
+  constructor (props) {
+    super(props);
+
+    const { order } = this.props;
+    this.state = {
+      areErrorsVisible: !isEqual({}, order.errors)
+    };
+  }
+
+  componentDidMount () {
+    this.validateData();
+  }
+
+  @boundMethod
+  onReturnClick () {
+    const { setFrame } = this.props;
     setFrame(frames.CART);
   };
 
-  const onOrderClick = () => {
-    setFrame(frames.ORDER_SUCCESS);
+  @boundMethod
+  onOrderClick () {
+    const { areErrorsVisible } = this.state;
+    const { order, setFrame } = this.props;
+
+    if (isEqual({}, order.errors)) {
+      if (areErrorsVisible) {
+        this.setState({
+          areErrorsVisible: false
+        });
+      }
+      setFrame(frames.ORDER_SUCCESS);
+      return;
+    }
+
+    this.setState({
+      areErrorsVisible: true
+    });
+  }
+
+  @boundMethod
+  onOrderChange () {
+    this.validateData();
   };
 
-  const onOrderChange = () => {
-    updateOrder(validateData());
-  };
-
-  const validateData = () => {
+  @boundMethod
+  validateData () {
+    const { updateOrder } = this.props;
     const form = document.forms.order;
-    return {
-      name: validateValue(
-        form.name.value, new RegExp('[A-Za-z -.]')),
-      street: validateValue(
-        form.street.value, new RegExp('[A-Za-z0-9,./ -]')),
-      zip: validateValue(
-        form.zip.value, new RegExp('[0-9-]')),
-      phone: validateValue(
-        form.phone.value, new RegExp('[0-9+() -]')),
+
+    const validatedData = validateOrder({
+      name: form.name.value,
+      street: form.street.value,
+      city: form.city.value,
+      zip: form.zip.value,
+      phone: form.phone.value,
       comment: form.comment.value
-    };
-  };
+    });
 
-  return (
-    <form className="order" name="order">
-      <h2 className="order__title">
-        Lieferungsdetails
-      </h2>
+    updateOrder(validatedData);
+  }
 
-      <div className="order__details">
-        <Input
-          style='order__name'
-          name='name'
-          title='Name'
-          value={order.name}
-          placeholder='Name'
-          caption='Pflichtfeld'
-          onChange={onOrderChange} />
+  render () {
+    const { areErrorsVisible } = this.state;
+    const { order } = this.props;
 
-        <div className="order__street-and-zip">
+    return (
+      <form className="order" name="order">
+        <h2 className="order__title">
+          Lieferungsdetails
+        </h2>
+
+        <div className="order__details">
+          <Input
+            style='order__name'
+            name='name'
+            title='Name'
+            value={order.name}
+            placeholder='Name'
+            caption='Pflichtfeld'
+            hasError={areErrorsVisible && order.errors.name}
+            onChange={this.onOrderChange} />
+
           <Input
             style='order__street'
             name='street'
@@ -58,55 +99,66 @@ const Order = ({ order, updateOrder, setFrame }) => {
             value={order.street}
             placeholder='Straße'
             caption='Pflichtfeld'
-            onChange={onOrderChange} />
+            hasError={areErrorsVisible && order.errors.street}
+            onChange={this.onOrderChange} />
+
+          <div className="order__city-and-zip">
+            <Input
+              style='order__city'
+              name='city'
+              title='Ort'
+              value={order.city}
+              placeholder='Ort'
+              onChange={this.onOrderChange} />
+
+            <Input
+              style='order__zip'
+              name='zip'
+              title='PZL'
+              value={order.zip}
+              placeholder='PZL'
+              inputMode='numeric'
+              onChange={this.onOrderChange} />
+          </div>
 
           <Input
-            style='order__zip'
-            name='zip'
-            title='Postleitzahl'
-            value={order.zip}
-            placeholder='Postleitzahl'
+            style='order__phone'
+            name='phone'
+            title='Telefon'
+            value={order.phone}
+            placeholder='Telefon'
             caption='Pflichtfeld'
-            inputMode='numeric'
-            onChange={onOrderChange} />
+            inputMode='tel'
+            hasError={areErrorsVisible && order.errors.phone}
+            onChange={this.onOrderChange} />
+
+          <TextArea
+            style='order__comment'
+            name='comment'
+            title='Hinweise'
+            value={order.comment}
+            placeholder='Anmerkungen zur Ihre Bestellung'
+            rows={4}
+            onChange={this.onOrderChange} />
         </div>
 
-        <Input
-          style='order__phone'
-          name='phone'
-          title='Telefon'
-          value={order.phone}
-          placeholder='Telefon'
-          caption='Pflichtfeld'
-          inputMode='tel'
-          onChange={onOrderChange} />
+        <div className="order__buttons">
+          <div
+            className="order__return"
+            onClick={this.onReturnClick}>
+            Zum Warenkorb
+          </div>
 
-        <TextArea
-          style='order__comment'
-          name='comment'
-          title='Hinweise'
-          value={order.comment}
-          placeholder='Anmerkungen zur Ihre Bestellung'
-          rows={4}
-          onChange={onOrderChange} />
-      </div>
-
-      <div className="order__buttons">
-        <div
-          className="order__return"
-          onClick={onReturnClick}>
-          Zum Warenkorb
+          <div
+            className="order__order"
+            onClick={this.onOrderClick}>
+            Bestellen
+          </div>
         </div>
-
-        <input
-          type="submit"
-          className="order__order"
-          onClick={onOrderClick}
-          value="Bestellen" />
-      </div>
-    </form>
-  );
-};
+      </form>
+    );
+  }
+}
 
 Order.propTypes = {
   order: PropTypes.shape({
@@ -114,7 +166,8 @@ Order.propTypes = {
     street: PropTypes.string.isRequired,
     zip: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
-    comment: PropTypes.string.isRequired
+    comment: PropTypes.string.isRequired,
+    errors: PropTypes.object.isRequired
   }).isRequired,
   updateOrder: PropTypes.func.isRequired,
   setFrame: PropTypes.func.isRequired

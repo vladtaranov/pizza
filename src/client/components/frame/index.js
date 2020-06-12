@@ -55,7 +55,7 @@ const Frame = (props) => {
   return (
     <section
       className={frameStyle}
-      onClick={onCloseClick}>
+      onMouseDown={onCloseClick}>
       <div className="frame__content">
         {
           renderContent()

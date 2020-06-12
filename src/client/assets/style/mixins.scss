@@ -84,7 +84,7 @@
   font-size: $fontSize;
 
   &.is-invalid {
-    background: rgba($colorPrimary, .1);
+    background: rgba($colorPrimary, .2);
   }
 
   &::-webkit-input-placeholder {

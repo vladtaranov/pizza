@@ -10,9 +10,11 @@ const initialState = {
   order: {
     name: '',
     street: '',
+    city: '',
     zip: '',
     phone: '',
-    comment: ''
+    comment: '',
+    errors: {}
   }
 };
 
