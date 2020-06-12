@@ -1,4 +1,4 @@
-const validateValue = (value, regExp) => {
+export const validateValue = (value, regExp) => {
   let validatedValue = '';
   for (const char of value) {
     if (char.match(regExp)) {
@@ -6,8 +6,4 @@ const validateValue = (value, regExp) => {
     }
   }
   return validatedValue;
-};
-
-export default {
-  validateValue
 };
