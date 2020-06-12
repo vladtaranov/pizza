@@ -35,10 +35,18 @@ const removeFromCart = (productId) => {
   }
 };
 
+const updateOrder = (order) => {
+  return {
+    type: actionTypes.UPDATE_ORDER,
+    payload: order
+  }
+};
+
 export default {
   saveProducts,
   setFrame,
   setCurrency,
   addToCart,
-  removeFromCart
+  removeFromCart,
+  updateOrder
 }

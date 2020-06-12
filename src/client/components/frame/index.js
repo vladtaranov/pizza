@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import frames from '../../constants/frames';
+import Cart from '../cart';
+import Order from '../order';
 import cn from 'classnames';
 import './frame.scss';
 
-const Frame = ({ children, currentFrame, setFrame }) => {
+const Frame = (props) => {
+  const {
+    products,
+    currentFrame,
+    cart,
+    currency,
+    setFrame,
+    addToCart,
+    removeFromCart
+  } = props;
+
   const frameStyle = cn(
     'frame',
     { 'is-visible': currentFrame !== frames.NONE }
@@ -16,21 +28,47 @@ const Frame = ({ children, currentFrame, setFrame }) => {
     }
   };
 
+  const renderContent = () => {
+    switch (currentFrame) {
+      case frames.CART:
+        return <Cart
+          products={products}
+          cart={cart}
+          currentCurrency={currency}
+          setFrame={setFrame}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart} />;
+
+      case frames.ORDER:
+        return <Order
+          setFrame={setFrame} />;
+
+      default:
+        return <Fragment />;
+    }
+  };
+
   return (
     <section
       className={frameStyle}
       onClick={onCloseClick}>
       <div className="frame__content">
-        {children}
+        {
+          renderContent()
+        }
       </div>
     </section>
   );
 };
 
 Frame.propTypes = {
-  children: PropTypes.element.isRequired,
+  products: PropTypes.array.isRequired,
   currentFrame: PropTypes.string.isRequired,
-  setFrame: PropTypes.func.isRequired
+  cart: PropTypes.object.isRequired,
+  currency: PropTypes.string.isRequired,
+  setFrame: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired
 };
 
 export default Frame;

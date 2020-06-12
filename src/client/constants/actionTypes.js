@@ -8,5 +8,8 @@ export default {
 
   // Cart
   ADD_TO_CART: 'ADD_TO_CART',
-  REMOVE_FROM_CART: 'REMOVE_FROM_CART'
+  REMOVE_FROM_CART: 'REMOVE_FROM_CART',
+
+  // Order
+  UPDATE_ORDER: 'UPDATE_ORDER'
 };

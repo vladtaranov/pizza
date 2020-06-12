@@ -75,3 +75,20 @@
     transition: background $transitionStandard;
   }
 }
+
+@mixin textField($fontSize) {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: .5em;
+  padding: .6em 1em;
+  font-size: $fontSize;
+
+  &.is-invalid {
+    background: rgba($colorPrimary, .1);
+  }
+
+  &:focus {
+    border-color: $colorPrimary;
+    transition: all $transitionStandard;
+  }
+}

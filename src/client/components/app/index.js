@@ -5,14 +5,12 @@ import { bindActionCreators } from 'redux';
 
 import actions from '../../actions';
 import Server from '../../services/server';
-import frames from '../../constants/frames';
 
 import ErrorMessage from '../error-boundary';
 import Spinner from '../spinner';
 import Header from '../header';
 import Product from '../product';
 import Frame from '../frame';
-import Cart from '../cart';
 import './app.scss';
 
 class App extends React.Component {
@@ -43,23 +41,6 @@ class App extends React.Component {
     }
   }
 
-  renderFrameContent () {
-    const { products, frame, cart, currency, setFrame, addToCart, removeFromCart } = this.props;
-
-    switch (frame) {
-      case frames.CART:
-        return <Cart
-          products={products}
-          cart={cart}
-          currentCurrency={currency}
-          setFrame={setFrame}
-          addToCart={addToCart}
-          removeFromCart={removeFromCart} />;
-      default:
-        return <Fragment />;
-    }
-  }
-
   render () {
     const { isFetching, hasFetchingError } = this.state;
     const {
@@ -83,12 +64,13 @@ class App extends React.Component {
     return (
       <Fragment>
         <Frame
+          products={products}
+          cart={cart}
           currentFrame={frame}
-          setFrame={setFrame}>
-          {
-            this.renderFrameContent()
-          }
-        </Frame>
+          currency={currency}
+          setFrame={setFrame}
+          addToCart={addToCart}
+          removeFromCart={removeFromCart} />
 
         <Header
           currency={currency}

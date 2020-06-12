@@ -4,9 +4,16 @@ import frames from '../constants/frames';
 
 const initialState = {
   products: [],
-  frame: frames.NONE,
+  frame: frames.ORDER,
   currency: currencies.EUR.value,
-  cart: {}
+  cart: {},
+  order: {
+    name: '',
+    street: '',
+    zip: '',
+    phone: '',
+    comment: ''
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +32,9 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.REMOVE_FROM_CART:
       return removeFromCart(state, action.payload);
+
+    case actionTypes.UPDATE_ORDER:
+      return updateOrder(state, action.payload);
 
     default:
       return state;
@@ -77,6 +87,13 @@ function removeFromCart (state, productId) {
   return {
     ...state,
     cart
+  }
+}
+
+function updateOrder (state, order) {
+  return {
+    ...state,
+    order
   }
 }
 
