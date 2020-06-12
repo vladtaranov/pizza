@@ -45,9 +45,8 @@
     cursor: pointer;
     @include notClickable;
 
-    &:hover {
+    @include hoverAndActive {
       color: $colorPrimary;
-      transition: all $transitionStandard;
     }
   }
 
@@ -67,10 +66,12 @@
       border-bottom: .2em solid $colorBlack;
     }
 
-    &:hover span {
-      border-color: $colorPrimary;
-      color: $colorPrimary;
-      transition: all $transitionStandard;
+    @include hoverAndActive {
+      & span {
+        border-color: $colorPrimary;
+        color: $colorPrimary;
+        transition: all $transitionStandard;
+      }
     }
   }
 
@@ -101,9 +102,8 @@
         background: $gradientGray;
       }
 
-      &:hover {
+      @include hoverAndActive {
         background: $gradientGray;
-        transition: all $transitionStandard;
       }
     }
   }
@@ -137,9 +137,8 @@
       border-left: 1px solid rgba(white, .75);
     }
 
-    &:hover {
+    @include hoverAndActive {
       opacity: .75;
-      transition: all $transitionStandard;
     }
   }
 }

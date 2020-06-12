@@ -11,8 +11,8 @@
     transition: transform $transitionStandard;
     @include notClickable;
 
-    &:hover {
-      transform: scale(1.05);
+    &:active {
+      transform: scale(1.1);
       transition: all $transitionStandard;
     }
   }
