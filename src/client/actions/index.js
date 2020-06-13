@@ -85,7 +85,7 @@ const updatePurchaseHistory = (purchase) => {
 const savePurchase = () => (dispatch, getState) => {
   const date = new Date();
   const id = `${date.getFullYear()}-
-    ${date.getMonth() + 1}-
+    ${date.getMonth()}-
     ${date.getDate()}-
     ${date.getHours()}-
     ${date.getMinutes()}-

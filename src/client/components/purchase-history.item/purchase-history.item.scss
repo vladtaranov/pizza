@@ -1,0 +1,73 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.purchase {
+  width: 100%;
+  margin-bottom: 2.5em;
+  font-size: .9rem;
+  line-height: 1.5;
+  text-align: left;
+
+  &__title {
+    font-size: 1rem;
+    margin-bottom: .5em;
+    font-weight: bold;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: .5em;
+  }
+
+  &__subtitle-and-size {
+    display: flex;
+    flex: 1;
+  }
+
+  &__subtitle {
+    margin-right: .5em;
+  }
+
+  &__size {
+    white-space: nowrap;
+    color: #aaa;
+  }
+
+  &__count {
+    width: 2em;
+    margin-left: 1em;
+    text-align: center;
+  }
+
+  &__price {
+    width: 4em;
+    margin-left: 1em;
+    text-align: right;
+  }
+
+  &__date-and-total-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__date {
+    margin-right: .5em;
+    font-weight: bold;
+  }
+
+  &__total-price {
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: $mobileBreakpoint) {
+  .purchase {
+    &__date-and-total-price {
+      display: block;
+    }
+  }
+}

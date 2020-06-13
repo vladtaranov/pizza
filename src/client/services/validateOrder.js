@@ -12,11 +12,11 @@ const validateOrder = (values) => {
 
   const validatedValues = {
     name: validateValue(
-      name, new RegExp('[A-Za-zäöü -.]')),
+      name, new RegExp('[A-Za-zäöüÖÜÄẞßа-яА-Я -.]')),
     street: validateValue(
-      street, new RegExp('[A-Za-zäöü0-9,./ -]')),
+      street, new RegExp('[A-Za-zäöüÖÜÄẞßа-яА-Я0-9,./ -]')),
     city: validateValue(
-      city, new RegExp('[A-Za-zäöü0-9,./ -]')),
+      city, new RegExp('[A-Za-zäöüÖÜÄẞßа-яА-Я0-9,./ -]')),
     zip: validateValue(
       zip, new RegExp('[0-9-]')),
     phone: validateValue(

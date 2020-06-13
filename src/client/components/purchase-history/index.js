@@ -2,16 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import frames from '../../constants/frames';
+import Purchase from '../purchase-history.item';
+import EmptyPurchaseHistory from '../purchase-history.empty';
 import './purchase-history.scss';
 
 const PurchaseHistory = ({ products, currency, purchaseHistory, setFrame }) => {
-
+  if (purchaseHistory.length === 0) {
+    return (
+      <EmptyPurchaseHistory
+        setFrame={setFrame} />
+    );
+  }
 
   const onReturnClick = () => {
     setFrame(frames.NONE);
   };
-
-  return 1;
 
   return (
     <div className="purchase-history">
@@ -21,35 +26,14 @@ const PurchaseHistory = ({ products, currency, purchaseHistory, setFrame }) => {
 
       <ul className="purchase-history__items">
         {
-          purchaseHistory.map((purchase) => {
-            const purchaseProducts = [];
-            Object.entries(purchase.items)
-              .map(([productId, count]) => {
-                const product = products.find((item) => +productId === item.id);
-                if (product) {
-                  product.count = count;
-                  purchaseProducts.push(product);
-                }
-              });
-
-            const title = purchase.date.getHours();
-
+          purchaseHistory.map((purchase, idx) => {
             return (
-              <li
+              <Purchase
                 key={purchase.id}
-                className="purchase-history__item">
-                <h3 className="purchase-history__item-title">
-                  {title}
-                </h3>
-                {
-                  purchaseProducts.map((product) => {
-                    <div className="purchase-history__item-info">
-
-
-                    </div>
-                  })
-                }
-              </li>
+                purchaseIdx={idx + 1}
+                purchase={purchase}
+                products={products}
+                currentCurrency={currency} />
             );
           })
         }

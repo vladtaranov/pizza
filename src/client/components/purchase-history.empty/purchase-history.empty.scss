@@ -1,0 +1,28 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.empty-purchase-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+
+  &__title {
+    margin: 0 0 1em 0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    font-weight: bold;
+  }
+
+  &__return {
+    height: 3em;
+    font-size: .9rem;
+    @include primaryButton;
+  }
+}
+
+@media screen and (max-width: $tabletBreakpoint) {
+  .empty-purchase-history {
+    width: 100%;
+  }
+}
