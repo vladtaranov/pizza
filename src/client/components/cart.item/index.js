@@ -6,7 +6,6 @@ import './cart-item.scss';
 
 const CartItem = ({ product, currentCurrency, addToCart, removeFromCart }) => {
   const image = require(`../../assets/images/catalog/${product.id}-min.jpg`);
-  const size = `${product.size} cm`;
   const price = formatPrice(product.price[currentCurrency] * product.count);
   const currency = currencies[currentCurrency].title;
 
@@ -30,7 +29,7 @@ const CartItem = ({ product, currentCurrency, addToCart, removeFromCart }) => {
             {product.title}
           </h3>
           <div className="cart-item__size">
-            {size}
+            {product.size}
           </div>
         </div>
         <p className="cart-item__description">

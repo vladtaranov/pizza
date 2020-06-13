@@ -35,7 +35,6 @@ const Purchase = ({ purchaseIdx, purchase, products, currentCurrency }) => {
 
       {
         purchaseProducts.map((product) => {
-          const size = `${product.size} cm`;
           const price = formatPrice(product.price[currentCurrency] * product.count);
 
           return (
@@ -47,7 +46,7 @@ const Purchase = ({ purchaseIdx, purchase, products, currentCurrency }) => {
                   {product.title}
                 </div>
                 <div className="purchase__size">
-                  {size}
+                  {product.size}
                 </div>
               </div>
 
