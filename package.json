@@ -60,6 +60,6 @@
     "webpack-dev-server": "^3.10.3"
   },
   "browserslist": [
-    "last 1 ChromeAndroid version"
+    "> 2%"
   ]
 }
