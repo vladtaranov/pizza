@@ -1,14 +1,9 @@
 import actionTypes from '../constants/actionTypes';
 import currencies from '../constants/currencies';
 import copyObject from '../utils/copyObject';
-import calculatePrice from '../utils/calculatePrice';
 
 const emptyCart = {
   items: {},
-  totalPrice: {
-    [currencies.EUR.value]: 0,
-    [currencies.USD.value]: 0
-  },
   delivery: {
     [currencies.EUR.value]: 7.9,
     [currencies.USD.value]: 9.9
@@ -33,21 +28,6 @@ const cart = (state = initialState, action) => {
   }
 };
 
-function getTotalPrice ({ cart, products }) {
-  return {
-    [currencies.EUR.value]: calculatePrice(
-      cart.items,
-      products,
-      cart.delivery[currencies.EUR.value],
-      currencies.EUR.value),
-    [currencies.USD.value]: calculatePrice(
-      cart.items,
-      products,
-      cart.delivery[currencies.USD.value],
-      currencies.USD.value)
-  };
-}
-
 function addToCart (state, productId) {
   const cart = Object.assign({}, state);
   const { items } = cart;
@@ -55,12 +35,10 @@ function addToCart (state, productId) {
   typeof items[productId] === 'number'
     ? items[productId] += 1
     : items[productId] = 1;
-  const totalPrice = getTotalPrice(state);
 
   return {
-    ...state.cart,
-    items,
-    totalPrice
+    ...state,
+    items
   };
 }
 
@@ -73,12 +51,10 @@ function removeFromCart (state, productId) {
       ? items[productId] -= 1
       : delete items[productId];
   }
-  const totalPrice = getTotalPrice(state);
 
   return {
-    ...state.cart,
-    items,
-    totalPrice
+    ...state,
+    items
   };
 }
 

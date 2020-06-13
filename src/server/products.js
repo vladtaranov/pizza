@@ -68,7 +68,65 @@ module.exports = [
     'Mozzarella, frische Tomaten, Oliven mit Stein, Zwiebeln, Oregano, piccante',
     [1],
     '32 cm',
-    [17.9, 19.9])
+    [17.9, 19.9]),
+
+  new Product(
+    11,
+    'Schokoladenmuffin',
+    'Süßes Schokoladenmuffin',
+    [2],
+    '',
+    [2.9, 3.9]),
+  new Product(
+    12,
+    'Vanille-Muffinn',
+    'Butter Vanille Cupcaken',
+    [2],
+    '',
+    [2.9, 3.9]),
+  new Product(
+    13,
+    'Schokoladenplätzchen',
+    'Butter Vanille Cupcaken',
+    [2],
+    '',
+    [1.9, 2.9]),
+  new Product(
+    14,
+    'Vanillekekse',
+    'Große zarte Kekse mit Schokoladen- und Vanillestücken',
+    [2],
+    '',
+    [1.9, 2.9]),
+
+  new Product(
+    15,
+    'Coca Cola',
+    '',
+    [3],
+    '0.5 lt',
+    [1.9, 2.9]),
+  new Product(
+    16,
+    'Sprite',
+    '',
+    [3],
+    '0.5 lt',
+    [1.9, 2.9]),
+  new Product(
+    17,
+    'Fanta',
+    '',
+    [3],
+    '0.5 lt',
+    [1.9, 2.9]),
+  new Product(
+    18,
+    'Stilles Wasser',
+    '',
+    [3],
+    '0.5 lt',
+    [1.9, 2.9])
 ];
 
 function Product (id, title, description, categories, size, price) {

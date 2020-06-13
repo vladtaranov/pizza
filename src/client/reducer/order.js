@@ -21,10 +21,7 @@ const order = (state = initialState, action) => {
 };
 
 function updateOrder (state, order) {
-  return {
-    ...state,
-    order
-  }
+  return order;
 }
 
 export default order;

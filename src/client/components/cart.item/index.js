@@ -28,13 +28,19 @@ const CartItem = ({ product, currentCurrency, addToCart, removeFromCart }) => {
           <h3 className="cart-item__title">
             {product.title}
           </h3>
-          <div className="cart-item__size">
-            {product.size}
-          </div>
+          {
+            product.size &&
+            <div className="cart-item__size">
+              {product.size}
+            </div>
+          }
         </div>
-        <p className="cart-item__description">
-          {product.description}
-        </p>
+        {
+          product.description &&
+          <p className="cart-item__description">
+            {product.description}
+          </p>
+        }
       </div>
 
       <div className="cart-item__count-container">

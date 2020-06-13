@@ -45,9 +45,12 @@ const Purchase = ({ purchaseIdx, purchase, products, currentCurrency }) => {
                 <div className="purchase__subtitle">
                   {product.title}
                 </div>
-                <div className="purchase__size">
-                  {product.size}
-                </div>
+                {
+                  product.size &&
+                  <div className="purchase__size">
+                    {product.size}
+                  </div>
+                }
               </div>
 
               <div className="purchase__count">
@@ -79,10 +82,6 @@ Purchase.propTypes = {
   purchaseIdx: PropTypes.number.isRequired,
   purchase: PropTypes.shape({
     items: PropTypes.object.isRequired,
-    totalPrice: PropTypes.shape({
-      EUR: PropTypes.number.isRequired,
-      USD: PropTypes.number.isRequired
-    }).isRequired,
     date: PropTypes.string.isRequired
   }).isRequired,
   products: PropTypes.array.isRequired,

@@ -55,9 +55,12 @@ const Product = (props) => {
               {product.title}
             </h3>
 
-            <div className="product__size">
-              {product.size}
-            </div>
+            {
+              product.size &&
+              <div className="product__size">
+                {product.size}
+              </div>
+            }
           </div>
 
           {
