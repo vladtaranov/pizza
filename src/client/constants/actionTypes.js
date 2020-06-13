@@ -1,6 +1,7 @@
 export default {
   // Fetching
   SAVE_PRODUCTS: 'SAVE_PRODUCTS',
+  SAVE_CATEGORIES: 'SAVE_CATEGORIES',
 
   // Interface
   SET_FRAME: 'SET_FRAME',
@@ -11,5 +12,8 @@ export default {
   REMOVE_FROM_CART: 'REMOVE_FROM_CART',
 
   // Order
-  UPDATE_ORDER: 'UPDATE_ORDER'
+  UPDATE_ORDER: 'UPDATE_ORDER',
+
+  // Purchase History
+  SAVE_PURCHASE: 'SAVE_PURCHASE'
 };

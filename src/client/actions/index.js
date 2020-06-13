@@ -7,6 +7,13 @@ const saveProducts = (products) => {
   }
 };
 
+const saveCategories = (categories) => {
+  return {
+    type: actionTypes.SAVE_CATEGORIES,
+    payload: categories
+  }
+};
+
 const setFrame = (frame) => {
   return {
     type: actionTypes.SET_FRAME,
@@ -44,6 +51,7 @@ const updateOrder = (order) => {
 
 export default {
   saveProducts,
+  saveCategories,
   setFrame,
   setCurrency,
   addToCart,

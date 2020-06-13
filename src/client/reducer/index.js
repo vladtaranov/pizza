@@ -4,6 +4,7 @@ import frames from '../constants/frames';
 
 const initialState = {
   products: [],
+  categories: [],
   frame: frames.NONE,
   currency: currencies.EUR.value,
   cart: {},
@@ -15,13 +16,17 @@ const initialState = {
     phone: '',
     comment: '',
     errors: {}
-  }
+  },
+  purchaseHistory: []
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SAVE_PRODUCTS:
       return saveProducts(state, action.payload);
+
+    case actionTypes.SAVE_CATEGORIES:
+      return saveCategories(state, action.payload);
 
     case actionTypes.SET_FRAME:
       return setFrame(state, action.payload);
@@ -47,6 +52,13 @@ function saveProducts (state, products) {
   return {
     ...state,
     products
+  }
+}
+
+function saveCategories (state, categories) {
+  return {
+    ...state,
+    categories
   }
 }
 

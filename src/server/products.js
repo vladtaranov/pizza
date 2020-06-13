@@ -3,72 +3,72 @@ module.exports = [
     1,
     'Margherita',
     'Tomatensauce, Mozzarella, Basilikum',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [12.9, 14.9]),
   new Product(
     2,
     'Funghi Freschi',
     'Frische Egerlinge, Käse',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [14.9, 15.9]),
   new Product(
     3,
     'Proschiutto E Funghi',
     'Hinterschinken, frische Egerlinge, Käse',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [16.9, 18.9]),
   new Product(
     4,
     'Proschiutto',
     'Hinterschinken, Käse',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [14.9, 15.9]),
   new Product(
     5,
     'Salami',
     'Salami, Käse',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [17.9, 19.9]),
   new Product(
     6,
     'Braccio Di Ferro',
     'Spinat, Ei, Käse, Knoblauch',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [17.9, 19.9]),
   new Product(
     7,
     'Hawaii',
     'Hinterschinken, Ananas, Käse',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [20.9, 23.9]),
   new Product(
     8,
     'Canarino',
     'Hinterschinken, frische Egerlinge, Salami, Sardellen, Käse',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [19.9, 22.9]),
   new Product(
     9,
     'Marinara',
     'Meeresfrüchte, Käse, Knoblauch',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19]),
+    [22.9, 25.9]),
   new Product(
     10,
     'Rustica',
     'Mozzarella, frische Tomaten, Oliven mit Stein, Zwiebeln, Oregano, piccante',
-    ['pizza'],
+    [1],
     32,
-    [17.9, 19])
+    [17.9, 19.9])
 ];
 
 function Product (id, title, description, categories, size, price) {
@@ -78,7 +78,7 @@ function Product (id, title, description, categories, size, price) {
   this.categories = categories;
   this.size = size;
   this.price = new Price(...price);
-  return this
+  return this;
 }
 
 function Price (eur, usd) {

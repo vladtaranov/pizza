@@ -3,14 +3,10 @@
 
 @mixin productWidth($columnCount, $marginBetweenProducts) {
   width: calc(100% / #{$columnCount} -
-    #{$marginBetweenProducts} * #{$columnCount - 1} / #{$columnCount});
+  #{$marginBetweenProducts} * #{$columnCount - 1} / #{$columnCount});
 }
 
-.app {
-  &__wrapper {
-    padding-top: 3.5rem;
-  }
-
+.category {
   &__title {
     margin: 2rem 0 2rem 0;
     font-size: 2rem;
@@ -38,7 +34,7 @@
 }
 
 @media screen and (max-width: $smallDesktopBreakpoint) {
-  .app {
+  .category {
     &__product {
       $marginBetweenProducts: 4em;
       @include productWidth(3, $marginBetweenProducts);
@@ -55,7 +51,7 @@
 }
 
 @media screen and (max-width: $tabletBreakpoint) {
-  .app {
+  .category {
     &__product {
       $marginBetweenProducts: 2em;
       margin-right: $marginBetweenProducts;
@@ -74,7 +70,7 @@
 }
 
 @media screen and (max-width: $mobileBreakpoint) {
-  .app {
+  .category {
     &__title {
       margin-top: 1em;
       font-size: 1.4rem;

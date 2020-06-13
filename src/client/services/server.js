@@ -16,6 +16,10 @@ class Server {
   async getAllProducts () {
     return await this._getResource('products');
   }
+
+  async getAllCategories () {
+    return await this._getResource('categories');
+  }
 }
 
 export default Server;

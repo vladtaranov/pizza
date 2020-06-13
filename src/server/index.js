@@ -5,8 +5,14 @@ const express = require('express');
 const app = express();
 
 app.use(express.static(Path.join(process.cwd(), 'dist', 'client')));
+
 app.get('/api/products', (request, response) => {
-  const data = require('./catalog');
+  const data = require('./products');
+  response.json(data);
+});
+
+app.get('/api/categories', (request, response) => {
+  const data = require('./categories');
   response.json(data);
 });
 

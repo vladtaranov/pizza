@@ -9,10 +9,9 @@ import Server from '../../services/server';
 import ErrorMessage from '../error-boundary';
 import Spinner from '../spinner';
 import Header from '../header';
-import Product from '../product';
+import Category from '../category';
 import Frame from '../frame';
 import Messages from '../messages';
-import './app.scss';
 
 class App extends React.Component {
   constructor (props) {
@@ -26,10 +25,18 @@ class App extends React.Component {
   }
 
   async componentDidMount () {
-    const { saveProducts } = this.props;
+    const { saveProducts, saveCategories } = this.props;
     try {
-      const products = await this.server.getAllProducts();
+      const [
+        products,
+        categories
+      ] = await Promise.all([
+        this.server.getAllProducts(),
+        this.server.getAllCategories()
+      ]);
+
       saveProducts(products);
+      saveCategories(categories);
       this.setState({
         isFetching: false
       });
@@ -46,6 +53,7 @@ class App extends React.Component {
     const { isFetching, hasFetchingError } = this.state;
     const {
       products,
+      categories,
       frame,
       currency,
       cart,
@@ -86,25 +94,20 @@ class App extends React.Component {
           setFrame={setFrame}
           setCurrency={setCurrency} />
 
-        <main className="wrapper app__wrapper">
-          <h2 className="app__title">
-            Pizza, die Sie lieben werden!
-          </h2>
+        <main className="wrapper">
+          {
+            categories.map((category) => {
+              const productsInCategory =
+                products.filter((product) => product.categories.includes(category.id));
 
-          <div className="app__catalog">
-            {
-              products.map((product) => {
-                return (
-                  <div key={product.id} className="app__product">
-                    <Product
-                      product={product}
-                      currency={currency}
-                      addToCart={addToCart} />
-                  </div>
-                );
-              })
-            }
-          </div>
+              return <Category
+                key={category.id}
+                products={productsInCategory}
+                category={category}
+                currency={currency}
+                addToCart={addToCart} />
+            })
+          }
         </main>
       </Fragment>
     );
@@ -114,6 +117,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
+    categories: state.categories,
     frame: state.frame,
     currency: state.currency,
     cart: state.cart,
@@ -124,6 +128,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     saveProducts: bindActionCreators(actions.saveProducts, dispatch),
+    saveCategories: bindActionCreators(actions.saveCategories, dispatch),
     setFrame: bindActionCreators(actions.setFrame, dispatch),
     setCurrency: bindActionCreators(actions.setCurrency, dispatch),
     addToCart: bindActionCreators(actions.addToCart, dispatch),
@@ -134,11 +139,13 @@ const mapDispatchToProps = (dispatch) => {
 
 App.propTypes = {
   products: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   frame: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   cart: PropTypes.object.isRequired,
   order: PropTypes.object.isRequired,
   saveProducts: PropTypes.func.isRequired,
+  saveCategories: PropTypes.func.isRequired,
   setFrame: PropTypes.func.isRequired,
   setCurrency: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
