@@ -24,17 +24,29 @@ class Header extends React.Component {
   }
 
   @boundMethod
+  closeMenu () {
+    this.setState({
+      isMobileMenuOpen: false
+    });
+  }
+
+  @boundMethod
   onPurchaseHistoryClick () {
     const { setFrame } = this.props;
     setFrame(frames.PURCHASE_HISTORY);
+    this.closeMenu();
   }
 
   @boundMethod
   onCartClick () {
+    const { isMobileMenuOpen } = this.state;
     const { currentFrame, setFrame } = this.props;
-    currentFrame === frames.CART
-      ? setFrame(frames.NONE)
-      : setFrame(frames.CART);
+    if (isMobileMenuOpen || currentFrame !== frames.CART) {
+      setFrame(frames.CART);
+    } else {
+      setFrame(frames.NONE);
+    }
+    this.closeMenu();
   }
 
   render () {

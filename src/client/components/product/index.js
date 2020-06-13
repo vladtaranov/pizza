@@ -89,7 +89,7 @@ Product.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
-    size: PropTypes.number.isRequired,
+    size: PropTypes.string.isRequired,
     price: PropTypes.shape({
       EUR: PropTypes.number.isRequired,
       USD: PropTypes.number.isRequired
