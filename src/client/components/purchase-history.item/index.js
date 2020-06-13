@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import currencies from '../../constants/currencies';
-import { formatPrice } from '../../utils/formatters';
+import { formatPrice, formatTime } from '../../utils/formatters';
 import getMonthTitle from '../../utils/getMonthTitle';
 import getDayOfWeekTitle from '../../utils/getDayOfWeekTitle';
 import './purchase-history.item.scss';
@@ -23,7 +23,7 @@ const Purchase = ({ purchaseIdx, purchase, products, currentCurrency }) => {
      ${date.getDate()}.
      ${getMonthTitle(date.getMonth() + 1)},
      ${date.getFullYear()}.
-     ${date.getHours()}:${date.getMinutes()}`;
+     ${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`;
   const totalPrice = formatPrice(purchase.totalPrice[currentCurrency]);
   const currency = currencies[currentCurrency].title;
 
