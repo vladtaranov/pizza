@@ -8,13 +8,13 @@ import CartItem from '../cart.item';
 import './cart.scss';
 
 const Cart = ({ products, cart, currentCurrency, setFrame, addToCart, removeFromCart }) => {
-  if (Object.keys(cart).length === 0) {
+  if (Object.keys(cart.items).length === 0) {
     return <EmptyCart
       onReturnClick={onReturnClick} />;
   }
 
   const productsInCart = [];
-  Object.entries(cart)
+  Object.entries(cart.items)
     .map(([productId, count]) => {
       const product = products.find((item) => +productId === item.id);
       if (product) {
@@ -23,9 +23,8 @@ const Cart = ({ products, cart, currentCurrency, setFrame, addToCart, removeFrom
       }
     });
 
-  const deliveryPrice = formatPrice(9.9);
-  const totalPrice = formatPrice(productsInCart
-    .reduce((sum, item) => sum + item.price[currentCurrency] * item.count, 0) + +deliveryPrice);
+  const deliveryPrice = formatPrice(cart.delivery[currentCurrency]);
+  const totalPrice = formatPrice(cart.totalPrice[currentCurrency]);
   const currency = currencies[currentCurrency].title;
 
   function onReturnClick () {

@@ -32,7 +32,7 @@ class Order extends React.Component {
   @boundMethod
   onOrderClick () {
     const { areErrorsVisible } = this.state;
-    const { order, setFrame } = this.props;
+    const { order, setFrame, clearCart, savePurchase } = this.props;
 
     if (isEqual({}, order.errors)) {
       if (areErrorsVisible) {
@@ -40,6 +40,8 @@ class Order extends React.Component {
           areErrorsVisible: false
         });
       }
+      savePurchase();
+      clearCart();
       setFrame(frames.ORDER_SUCCESS);
       return;
     }
@@ -169,8 +171,10 @@ Order.propTypes = {
     comment: PropTypes.string.isRequired,
     errors: PropTypes.object.isRequired
   }).isRequired,
+  setFrame: PropTypes.func.isRequired,
+  clearCart: PropTypes.func.isRequired,
   updateOrder: PropTypes.func.isRequired,
-  setFrame: PropTypes.func.isRequired
+  savePurchase: PropTypes.func.isRequired
 };
 
 export default Order;

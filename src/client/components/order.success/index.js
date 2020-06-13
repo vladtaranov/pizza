@@ -5,7 +5,7 @@ import './order-success.scss';
 
 const OrderSuccess = ({ setFrame }) => {
   const onReturnClick = () => {
-    setFrame(frames.NONE);
+    setFrame(frames.PURCHASE_HISTORY);
   };
 
   return (
@@ -21,7 +21,7 @@ const OrderSuccess = ({ setFrame }) => {
       <div
         className="order-success__return"
         onClick={onReturnClick}>
-        OK
+        Bisherige Käufe anzeigen
       </div>
     </div>
   );

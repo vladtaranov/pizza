@@ -1,13 +1,27 @@
 import actionTypes from '../constants/actionTypes';
 import currencies from '../constants/currencies';
 import frames from '../constants/frames';
+import calculatePrice from '../utils/calculatePrice';
+import copyObject from '../utils/copyObject';
+
+const emptyCart = {
+  items: {},
+  totalPrice: {
+    [currencies.EUR.value]: 0,
+    [currencies.USD.value]: 0
+  },
+  delivery: {
+    [currencies.EUR.value]: 7.9,
+    [currencies.USD.value]: 9.9
+  }
+};
 
 const initialState = {
   products: [],
   categories: [],
   frame: frames.NONE,
   currency: currencies.EUR.value,
-  cart: {},
+  cart: copyObject(emptyCart),
   order: {
     name: '',
     street: '',
@@ -40,8 +54,14 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_FROM_CART:
       return removeFromCart(state, action.payload);
 
+    case actionTypes.CLEAR_CART:
+      return clearCart(state);
+
     case actionTypes.UPDATE_ORDER:
       return updateOrder(state, action.payload);
+
+    case actionTypes.UPDATE_PURCHASE_HISTORY:
+      return savePurchase(state, action.payload);
 
     default:
       return state;
@@ -76,38 +96,82 @@ function setCurrency (state, currency) {
   }
 }
 
+function getTotalPrice ({ cart, products }) {
+  return {
+    [currencies.EUR.value]: calculatePrice(
+      cart.items,
+      products,
+      cart.delivery[currencies.EUR.value],
+      currencies.EUR.value),
+    [currencies.USD.value]: calculatePrice(
+      cart.items,
+      products,
+      cart.delivery[currencies.USD.value],
+      currencies.USD.value)
+  };
+}
+
 function addToCart (state, productId) {
   const cart = Object.assign({}, state.cart);
+  const { items } = cart;
 
-  typeof cart[productId] === 'number'
-    ? cart[productId] += 1
-    : cart[productId] = 1;
+  typeof items[productId] === 'number'
+    ? items[productId] += 1
+    : items[productId] = 1;
+  const totalPrice = getTotalPrice(state);
 
   return {
     ...state,
-    cart
-  }
+    cart: {
+      ...state.cart,
+      items,
+      totalPrice
+    }
+  };
 }
 
 function removeFromCart (state, productId) {
   const cart = Object.assign({}, state.cart);
+  const { items } = cart;
 
-  if (typeof cart[productId] === 'number') {
-    cart[productId] > 1
-      ? cart[productId] -= 1
-      : delete cart[productId];
+  if (typeof items[productId] === 'number') {
+    items[productId] > 1
+      ? items[productId] -= 1
+      : delete items[productId];
   }
+  const totalPrice = getTotalPrice(state);
 
   return {
     ...state,
-    cart
-  }
+    cart: {
+      ...state.cart,
+      items,
+      totalPrice
+    }
+  };
+}
+
+function clearCart (state) {
+  return {
+    ...state,
+    cart: copyObject(emptyCart)
+  };
 }
 
 function updateOrder (state, order) {
   return {
     ...state,
     order
+  }
+}
+
+function savePurchase (state, purchase) {
+  return {
+    ...state,
+    purchaseHistory: [
+      ...state.purchaseHistory,
+      purchase
+    ]
   }
 }
 

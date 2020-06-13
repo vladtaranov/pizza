@@ -1,4 +1,6 @@
 import actionTypes from '../constants/actionTypes';
+import Server from '../services/server';
+import LocalStorage from '../services/localStorage';
 
 const saveProducts = (products) => {
   return {
@@ -11,6 +13,24 @@ const saveCategories = (categories) => {
   return {
     type: actionTypes.SAVE_CATEGORIES,
     payload: categories
+  }
+};
+
+const fetchProducts = () => async (dispatch) => {
+  try {
+    const server = new Server();
+    const [
+      products,
+      categories
+    ] = await Promise.all([
+      server.getAllProducts(),
+      server.getAllCategories()
+    ]);
+
+    dispatch(saveProducts(products));
+    dispatch(saveCategories(categories));
+  } catch (error) {
+    throw new Error(error);
   }
 };
 
@@ -42,6 +62,12 @@ const removeFromCart = (productId) => {
   }
 };
 
+const clearCart = () => {
+  return {
+    type: actionTypes.CLEAR_CART
+  }
+};
+
 const updateOrder = (order) => {
   return {
     type: actionTypes.UPDATE_ORDER,
@@ -49,12 +75,67 @@ const updateOrder = (order) => {
   }
 };
 
+const updatePurchaseHistory = (purchase) => {
+  return {
+    type: actionTypes.UPDATE_PURCHASE_HISTORY,
+    payload: purchase
+  }
+};
+
+const savePurchase = () => (dispatch, getState) => {
+  const purchase = {
+    order: getState().cart.items,
+    totalPrice: getState().cart.totalPrice,
+    date: new Date()
+  };
+
+  try {
+    let purchases = LocalStorage.load('purchaseHistory');
+    if (purchases) {
+      if (!purchases.find((item) => item.id === purchase.id)) {
+        purchases.push(purchase);
+      }
+    } else {
+      purchases = [purchase];
+    }
+    LocalStorage.save('purchaseHistory', purchases);
+  } catch (error) {
+    console.log(error);
+  }
+
+  dispatch(updatePurchaseHistory(purchase));
+};
+
+const fetchPurchases = () => (dispatch) => {
+  try {
+    const purchases = LocalStorage.load('purchaseHistory');
+    if (purchases) {
+      purchases.forEach((purchase) => {
+        dispatch(savePurchase(purchase));
+      });
+    }
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
 export default {
-  saveProducts,
-  saveCategories,
+  // Fetching
+  fetchProducts,
+
+  // Interface
   setFrame,
   setCurrency,
+
+  // Cart
   addToCart,
   removeFromCart,
-  updateOrder
+  clearCart,
+
+  // Order
+  updateOrder,
+
+  // Purchase History
+  savePurchase,
+  fetchPurchases
 }
