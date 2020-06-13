@@ -83,10 +83,18 @@ const updatePurchaseHistory = (purchase) => {
 };
 
 const savePurchase = () => (dispatch, getState) => {
+  const date = new Date();
+  const id = `${date.getFullYear()}-
+    ${date.getMonth() + 1}-
+    ${date.getDate()}-
+    ${date.getHours()}-
+    ${date.getMinutes()}-
+    ${date.getSeconds()}`.replace(/\s+/g, '');
   const purchase = {
-    order: getState().cart.items,
+    id,
+    items: getState().cart.items,
     totalPrice: getState().cart.totalPrice,
-    date: new Date()
+    date
   };
 
   try {
@@ -111,7 +119,7 @@ const fetchPurchases = () => (dispatch) => {
     const purchases = LocalStorage.load('purchaseHistory');
     if (purchases) {
       purchases.forEach((purchase) => {
-        dispatch(savePurchase(purchase));
+        dispatch(updatePurchaseHistory(purchase));
       });
     }
   } catch (error) {

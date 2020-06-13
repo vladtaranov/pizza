@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { boundMethod } from 'autobind-decorator';
 import actions from '../../actions';
 
 import ErrorMessage from '../error-boundary';
@@ -10,7 +11,6 @@ import Header from '../header';
 import Category from '../category';
 import Frame from '../frame';
 import Messages from '../messages';
-import {boundMethod} from 'autobind-decorator';
 
 class App extends React.Component {
   constructor (props) {

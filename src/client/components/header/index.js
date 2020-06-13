@@ -24,6 +24,12 @@ class Header extends React.Component {
   }
 
   @boundMethod
+  onPurchaseHistoryClick () {
+    const { setFrame } = this.props;
+    setFrame(frames.PURCHASE_HISTORY);
+  }
+
+  @boundMethod
   onCartClick () {
     const { currentFrame, setFrame } = this.props;
     currentFrame === frames.CART
@@ -63,7 +69,9 @@ class Header extends React.Component {
           <div className={mobileMenuStyle}>
 
             <div className="header__account">
-              <div className="header__purchases">
+              <div
+                className="header__purchases"
+                onClick={this.onPurchaseHistoryClick}>
                 Bisherige Käufe
               </div>
             </div>

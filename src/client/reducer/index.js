@@ -19,7 +19,7 @@ const emptyCart = {
 const initialState = {
   products: [],
   categories: [],
-  frame: frames.NONE,
+  frame: frames.PURCHASE_HISTORY,
   currency: currencies.EUR.value,
   cart: copyObject(emptyCart),
   order: {

@@ -15,4 +15,19 @@
     font-weight: bold;
     text-align: left;
   }
+
+  &__items {
+
+  }
+
+  &__item {
+
+  }
+
+  &__return {
+    align-self: flex-start;
+    height: 3em;
+    font-size: .9rem;
+    @include primaryButton;
+  }
 }
