@@ -26,7 +26,7 @@ const Cart = ({ products, cart, currentCurrency, setFrame, addToCart, removeFrom
   const deliveryPrice = formatPrice(cart.delivery[currentCurrency]);
   const totalPrice = formatPrice(
     productsInCart.reduce((sum, product) =>
-      sum + product.price[currentCurrency] * product.count, 0));
+      sum + product.price[currentCurrency] * product.count, 0) + cart.delivery[currentCurrency]);
   const currency = currencies[currentCurrency].title;
 
   function onReturnClick () {

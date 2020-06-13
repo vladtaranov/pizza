@@ -13,6 +13,10 @@
     line-height: 1.5;
     font-weight: bold;
     text-align: center;
+
+    & span {
+      border-bottom: .23rem solid $colorBlack;
+    }
   }
 
   &__catalog {

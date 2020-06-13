@@ -6,7 +6,7 @@ import Purchase from '../purchase-history.item';
 import EmptyPurchaseHistory from '../purchase-history.empty';
 import './purchase-history.scss';
 
-const PurchaseHistory = ({ products, currency, purchaseHistory, setFrame }) => {
+const PurchaseHistory = ({ products, deliveryCost, currency, purchaseHistory, setFrame }) => {
   if (purchaseHistory.length === 0) {
     return (
       <EmptyPurchaseHistory
@@ -33,6 +33,7 @@ const PurchaseHistory = ({ products, currency, purchaseHistory, setFrame }) => {
                 purchaseIdx={idx + 1}
                 purchase={purchase}
                 products={products}
+                deliveryCost={deliveryCost}
                 currentCurrency={currency} />
             );
           })
@@ -50,6 +51,7 @@ const PurchaseHistory = ({ products, currency, purchaseHistory, setFrame }) => {
 
 PurchaseHistory.propTypes = {
   products: PropTypes.array.isRequired,
+  deliveryCost: PropTypes.object.isRequired,
   currency: PropTypes.string.isRequired,
   purchaseHistory: PropTypes.array.isRequired,
   setFrame: PropTypes.func.isRequired

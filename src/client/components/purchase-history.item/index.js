@@ -6,7 +6,7 @@ import getMonthTitle from '../../utils/getMonthTitle';
 import getDayOfWeekTitle from '../../utils/getDayOfWeekTitle';
 import './purchase-history.item.scss';
 
-const Purchase = ({ purchaseIdx, purchase, products, currentCurrency }) => {
+const Purchase = ({ purchaseIdx, purchase, products, deliveryCost, currentCurrency }) => {
   const purchaseProducts = [];
   Object.entries(purchase.items)
     .map(([productId, count]) => {
@@ -24,7 +24,9 @@ const Purchase = ({ purchaseIdx, purchase, products, currentCurrency }) => {
      ${getMonthTitle(date.getMonth() + 1)},
      ${date.getFullYear()}.
      ${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`;
-  const totalPrice = formatPrice(purchase.totalPrice[currentCurrency]);
+  const totalPrice = formatPrice(
+    purchaseProducts.reduce((sum, product) =>
+      sum + product.price[currentCurrency] * product.count, 0) + deliveryCost[currentCurrency]);
   const currency = currencies[currentCurrency].title;
 
   return (
@@ -81,10 +83,10 @@ const Purchase = ({ purchaseIdx, purchase, products, currentCurrency }) => {
 Purchase.propTypes = {
   purchaseIdx: PropTypes.number.isRequired,
   purchase: PropTypes.shape({
-    items: PropTypes.object.isRequired,
-    date: PropTypes.string.isRequired
+    items: PropTypes.object.isRequired
   }).isRequired,
   products: PropTypes.array.isRequired,
+  deliveryCost: PropTypes.object.isRequired,
   currentCurrency: PropTypes.string.isRequired
 };
 

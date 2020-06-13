@@ -65,6 +65,7 @@ const Frame = (props) => {
       case frames.PURCHASE_HISTORY:
         return <PurchaseHistory
           products={products}
+          deliveryCost={cart.delivery}
           currency={currency}
           purchaseHistory={purchaseHistory}
           setFrame={setFrame} />;

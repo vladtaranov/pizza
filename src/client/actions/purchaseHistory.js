@@ -19,7 +19,6 @@ const savePurchase = () => (dispatch, getState) => {
   const purchase = {
     id,
     items: getState().cart.items,
-    totalPrice: getState().cart.totalPrice,
     date
   };
 

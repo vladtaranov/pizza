@@ -86,7 +86,7 @@ module.exports = [
     [2.9, 3.9]),
   new Product(
     13,
-    'Schokoladenplätzchen',
+    'Schokoladenkekse',
     'Butter Vanille Cupcaken',
     [2],
     '',

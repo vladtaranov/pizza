@@ -7,7 +7,9 @@ const Category = ({ products, category, currency, addToCart }) => {
   return (
     <section className="category">
       <h2 className="category__title">
-        {category.title}
+        <span>
+          {category.title}
+        </span>
       </h2>
 
       <div className="category__catalog">
