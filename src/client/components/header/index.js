@@ -63,11 +63,8 @@ class Header extends React.Component {
           <div className={mobileMenuStyle}>
 
             <div className="header__account">
-              <div className="header__login">
-                Anmelden
-              </div>
-              <div className="header__register">
-                Registrieren
+              <div className="header__purchases">
+                Bisherige Käufe
               </div>
             </div>
             <ul className="header__currency">
