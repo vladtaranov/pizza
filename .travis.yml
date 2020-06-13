@@ -13,9 +13,3 @@ install:
 
 script:
   - npm run build
-
-deploy:
-  provider: heroku
-  app: pizza-munich
-  api_key:
-    secure: 4fd22dd8-8fa1-46e1-a37b-3eb6c9ca1701
