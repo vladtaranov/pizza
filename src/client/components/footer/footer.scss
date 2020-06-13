@@ -1,0 +1,25 @@
+@import '../../assets/style/constants';
+@import '../../assets/style/mixins';
+
+.footer {
+  width: 100%;
+  height: 5rem;
+  border-top: 1px solid #ddd;
+  background: white;
+  font-size: .9rem;
+
+  &__wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: $mobileBreakpoint) {
+  .footer {
+    &__wrapper {
+      justify-content: center;
+    }
+  }
+}

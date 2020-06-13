@@ -11,6 +11,7 @@ import Header from '../../components/header';
 import Category from '../../components/category';
 import Frame from '../../components/frame';
 import Messages from '../../components/messages';
+import Footer from '../../components/footer';
 
 class App extends React.Component {
   constructor (props) {
@@ -119,6 +120,8 @@ class App extends React.Component {
             })
           }
         </main>
+
+        <Footer />
       </Fragment>
     );
   }
