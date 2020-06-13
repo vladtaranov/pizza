@@ -5,12 +5,12 @@ import { bindActionCreators } from 'redux';
 import { boundMethod } from 'autobind-decorator';
 import actions from '../../actions';
 
-import ErrorMessage from '../error-boundary';
-import Spinner from '../spinner';
-import Header from '../header';
-import Category from '../category';
-import Frame from '../frame';
-import Messages from '../messages';
+import ErrorMessage from '../../components/error-boundary';
+import Spinner from '../../components/spinner';
+import Header from '../../components/header';
+import Category from '../../components/category';
+import Frame from '../../components/frame';
+import Messages from '../../components/messages';
 
 class App extends React.Component {
   constructor (props) {
@@ -126,10 +126,10 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
-    categories: state.categories,
-    frame: state.frame,
-    currency: state.currency,
+    products: state.catalog.products,
+    categories: state.catalog.categories,
+    frame: state.appearance.frame,
+    currency: state.appearance.currency,
     cart: state.cart,
     order: state.order,
     purchaseHistory: state.purchaseHistory
@@ -138,15 +138,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: bindActionCreators(actions.fetchProducts, dispatch),
-    setFrame: bindActionCreators(actions.setFrame, dispatch),
-    setCurrency: bindActionCreators(actions.setCurrency, dispatch),
-    addToCart: bindActionCreators(actions.addToCart, dispatch),
-    removeFromCart: bindActionCreators(actions.removeFromCart, dispatch),
-    clearCart: bindActionCreators(actions.clearCart, dispatch),
-    updateOrder: bindActionCreators(actions.updateOrder, dispatch),
-    savePurchase: bindActionCreators(actions.savePurchase, dispatch),
-    fetchPurchases: bindActionCreators(actions.fetchPurchases, dispatch)
+    ...bindActionCreators(actions, dispatch)
   };
 };
 

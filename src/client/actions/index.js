@@ -13,7 +13,7 @@ export default {
   setCurrency: appearance.setCurrency,
 
   // Cart
-  addToCartL: cart.addToCart,
+  addToCart: cart.addToCart,
   removeFromCart: cart.removeFromCart,
   clearCart: cart.clearCart,
 
