@@ -12,7 +12,7 @@ export default (day) => {
       return 'Freitag';
     case 6:
       return 'Samstag';
-    case 7:
+    case 0:
       return 'Sonntag';
   }
 };
