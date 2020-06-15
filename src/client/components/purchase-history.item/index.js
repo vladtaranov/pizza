@@ -18,7 +18,6 @@ const Purchase = ({ purchaseIdx, purchase, products, deliveryCost, currentCurren
     });
   const title = `${purchaseIdx}. Bestellung`;
   const date = new Date(purchase.date);
-  console.log(getDayOfWeekTitle(7));
   const dateTitle =
     `${getDayOfWeekTitle(date.getDay())},
      ${date.getDate()}.
